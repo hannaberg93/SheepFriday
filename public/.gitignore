@@ -15,10 +15,10 @@
 # tracked by Git remain untracked.
 #
 # To ignore uncommitted changes in a file that is already tracked,
-# use `git update-index --assume-unchanged`.
+# use git update-index --assume-unchanged.
 #
 # To stop tracking a file that is currently tracked,
-# use `git rm --cached`
+# use git rm --cached
 #
 # Change Log:
 # 20150227 Ignore hello.php plugin. props @damienfa
@@ -29,40 +29,30 @@
 # 20140402 Initially Published
 #
 # -----------------------------------------------------------------
-
 # ignore everything in the root except the "wp-content" directory.
 /*
 !wp-content/
-
 # ignore all files starting with .
 .*
-
 # track this file .gitignore (i.e. do NOT ignore it)
 !.gitignore
-
 # track .editorconfig file (i.e. do NOT ignore it)
 !.editorconfig
-
 # track readme.md in the root (i.e. do NOT ignore it)
 !readme.md
-
 # ignore all files that start with ~
 ~*
-
 # ignore OS generated files
 ehthumbs.db
 Thumbs.db
-
 # ignore Editor files
 *.sublime-project
 *.sublime-workspace
 *.komodoproject
-
 # ignore log files and databases
 *.log
 *.sql
 *.sqlite
-
 # ignore compiled files
 *.com
 *.class
@@ -70,7 +60,6 @@ Thumbs.db
 *.exe
 *.o
 *.so
-
 # ignore packaged files
 *.7z
 *.dmg
@@ -80,7 +69,6 @@ Thumbs.db
 *.rar
 *.tar
 *.zip
-
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins" directory
 # "plugins" directory
@@ -92,16 +80,21 @@ wp-content/*
 !wp-content/themes/
 !wp-content/uploads/
 !wp-content/uploads/*
-
 # ignore these plugins from the core
 # wp-content/plugins/better-wp-security
 # wp-content/plugins/all-in-one-wp-migration
-
+wp-content/plugins/advanced-custom-fields
+wp-content/plugins/contact-form-7
+wp-content/plugins/custom-post-type-ui
+wp-content/plugins/jetpack
+wp-content/plugins/duplicator
+wp-content/plugins/woocommerce-gateway-stripe
+wp-content/plugins/woocommerce-jetpack
+wp-content/plugins/woocommerce-services
+wp-content/plugins/wordfence
 # ignore specific themes
 wp-content/themes/twenty*/
-
 # ignore node/grunt dependency directories
 node_modules/
-
 # ignore .DS_Store (OSX Filesystem)
 .DS_Store
