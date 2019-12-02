@@ -92,6 +92,7 @@ wp-content/plugins/woocommerce-jetpack
 wp-content/plugins/woocommerce-services
 wp-content/plugins/wordfence
 wp-content/plugins/duplicator
+
 # ignore specific themes
 wp-content/themes/twenty*/
 # ignore node/grunt dependency directories
