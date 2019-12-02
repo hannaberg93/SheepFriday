@@ -96,6 +96,15 @@ wp-content/*
 # ignore these plugins from the core
 # wp-content/plugins/better-wp-security
 # wp-content/plugins/all-in-one-wp-migration
+wp-content/plugins/advanced-custom-fields
+wp-content/plugins/contact-form-7
+wp-content/plugins/custom-post-type-ui
+wp-content/plugins/jetpack
+wp-content/plugins/woocommerce-gateway-stripe
+wp-content/plugins/woocommerce-jetpack
+wp-content/plugins/woocommerce-services
+wp-content/plugins/wordfence
+wp-content/plugins/duplicator
 
 # ignore specific themes
 wp-content/themes/twenty*/
