@@ -30,6 +30,12 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<a class="skip-link sr-only sr-only-focusable" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
 
+		<?php do_action( 'get_product_search_form' ); ?>
+
+		<?php do_action( 'woocommerce_mini_cart' ); ?>
+
+
+
 		<nav class="navbar navbar-expand-md navbar-dark bg-primary">
 
 		<?php if ( 'container' == $container ) : ?>
