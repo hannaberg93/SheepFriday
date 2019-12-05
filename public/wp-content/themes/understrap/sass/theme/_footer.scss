@@ -89,7 +89,16 @@
   }
 
   .footer-dark {
-	h2{
-		text-align: center !important;
+	.contact-mail{
+		color: white;
+		font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+		text-decoration: none;
+	}
+	hr { display: block; height: 1px;
+		border: 0; border-top: 1px solid #ccc;
+		margin: 1em 0; padding: 0; }
+	.footer-logo{
+		width: 10em;
+		height: auto;
 	}
   }
