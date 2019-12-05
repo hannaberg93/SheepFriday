@@ -19,30 +19,32 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 ?>
 
-<div class="wrapper" id="page-wrapper">
+
   
   <div class='row'>
 
-    <div class='col-3'>
+    <div class='col-2 col-sm-4 col-md-3 col-lg-2 d-none d-sm-block'>
       <?php get_template_part( 'sidebar-templates/sidebar', 'menu' ); ?>
     </div>
 
     <div class='col'>
-      <div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
-        <div class="row">
-          <main class="site-main" id="main">
-            <?php while ( have_posts() ) : the_post(); ?>
-              <?php get_template_part( 'loop-templates/content', 'page' ); ?>
-            <?php endwhile; // end of the loop. ?>
-          </main><!-- #main -->
-        </div><!-- .row -->
-      </div><!-- #content -->
+      <div class="wrapper" id="page-wrapper">
+        <div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+          <div class="row">
+            <main class="site-main" id="main">
+              <?php while ( have_posts() ) : the_post(); ?>
+                <?php get_template_part( 'loop-templates/content', 'page' ); ?>
+              <?php endwhile; // end of the loop. ?>
+            </main><!-- #main -->
+          </div><!-- .row -->
+        </div><!-- #content -->
+      </div><!-- #page-wrapper -->
     </div><!-- .col -->
 
   </div><!-- .row -->
 
 	
 
-</div><!-- #page-wrapper -->
+
 
 <?php get_footer();
