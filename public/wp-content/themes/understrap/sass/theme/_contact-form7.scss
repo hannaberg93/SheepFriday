@@ -17,6 +17,10 @@
 .wpcf7 {
   max-width: 600px;
   margin: 0 auto !important;
+  margin-top:20px;
+  background-color: #f1f1f1;
+  padding:20px;
+
 
   // all inputs except radios and checkboxes inherit from form-control
   input[type=text],
@@ -44,7 +48,21 @@
   input[type=submit] {
     @extend .btn;
     @extend .btn-outline-primary;
+    background-color:green;
+    color:white;
+    border:none;
+
   }
+  input:hover[type=submit]{
+      background-color:green;
+    }
+
+    input:focus[type=submit] {
+      box-shadow: none;
+      background-color:green;
+      color:white;
+    }
+
 
   .wpcf7-form {
 
@@ -59,6 +77,14 @@
     }
   }
 
+  input:focus[type=text],
+  input:focus[type=email],
+  textarea:focus,
+  select:focus{
+    border-color:#53f;
+    box-shadow: 2px 5px 15px -1px #53f;
+  }
+
   // not valid tip for each control
   .wpcf7-not-valid-tip {
     color: theme-color("danger");
@@ -70,4 +96,14 @@
     color: theme-color("danger");
     border: 1px solid $gray-200;
   }
+}
+
+.page-id-60 {
+
+  .entry-title {
+  text-align: center;
+ }
+ .wp-block-columns {
+  margin-top:40px;
+ }
 }
