@@ -95,6 +95,8 @@ wp-content/plugins/woocommerce-services
 wp-content/plugins/wordfence
 wp-content/plugins/duplicator
 
+wp-content/themes/understrap/src/
+
 # ignore specific themes
 wp-content/themes/twenty*/
 # ignore node/grunt dependency directories
