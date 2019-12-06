@@ -1,3 +1,27 @@
 /**
 * Navbar styles
 */
+.navbar{
+	.nav-item{
+		list-style-type: none;
+		color: white;
+	}
+	.fa{
+		color: white;
+		margin: 0 5px 0 5px;
+		font-size: 30px;
+	}
+	.right{
+		justify-content: center;
+		.nav-item{
+			color:red;
+		}
+	}
+}
+
+#search-form{
+	display: flex;
+	.woocommerce-product-search {
+		flex: 1;
+	}
+}
