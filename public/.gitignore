@@ -80,6 +80,8 @@ wp-content/*
 !wp-content/themes/
 !wp-content/uploads/
 !wp-content/uploads/*
+
+wp-content/themes/understrap/src/
 # ignore these plugins from the core
 # wp-content/plugins/better-wp-security
 # wp-content/plugins/all-in-one-wp-migration

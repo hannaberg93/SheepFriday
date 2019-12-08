@@ -1,33 +1,58 @@
 <?php
 /**
- * The template for displaying product search form
+ * The template for displaying product search form in navbar
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/product-searchform.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 3.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 ?>
-<form role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<div class="input-group">
+
+<!-- Search form, large screens -->
+<div class="search-form d-none d-lg-block d-l-none d-xl-block text-center">
+
+	<form class="form-inline" role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+
 		<label class="sr-only" for="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
-		<input type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+
+		<input class="form-control" type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
 		<input type="hidden" name="post_type" value="product" />
+
 		<span class="input-group-append">
-			<button class="submit btn btn-primary" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'understrap' ); ?>"><?php echo esc_html_x( 'Search', 'submit button', 'understrap' ); ?></button>
+			<button class="submit btn pl-0 pr-0 ml-1" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'understrap' ); ?>">
+				<i class="fa fa-search"></i>
+			</button>
 		</span>
-	</div>
-</form>
+
+	</form>
+
+</div> <!-- /.search-form -->
+
+
+<!-- Search dropdown, medium and small screens -->
+<div class="search-dropdown d-lg-none d-l-block" style="position: initial;">
+
+	<button class="search-button btn dropdown-toggle" type="button" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="<?php echo esc_attr_x( 'Search', 'understrap' ); ?>">
+		<i class="fa fa-search"></i>
+	</button>
+
+	<div class="dropdown-menu" id="navbarSupportedContent" aria-labelledby="dropdownSearch" >
+
+		<form class="input-group md-form form-sm form-2 pl-0" role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+
+			<label class="sr-only" for="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
+
+			<input class="form-control my-0 py-1" type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
+			<input type="hidden" name="post_type" value="product" />
+
+			<button class="submit btn p-0" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'understrap' ); ?>">
+				<i class="fa fa-search"></i>
+			</button>
+
+		</form>
+
+	</div> <!-- /.dropdown-menu -->
+
+</div> <!-- /.search-dropdown -->
