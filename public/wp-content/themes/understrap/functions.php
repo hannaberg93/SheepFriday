@@ -47,24 +47,19 @@ function sheep_get_menu_items() {
     $menuitems = wp_get_nav_menu_items($menu->term_id);
 
     foreach($menuitems as $menuitem){
+	echo '<a href=" ' . $menuitem->url . ' ">';
 	    if($menuitem->title === 'Cart'){
-		    echo '<a href=" ' . $menuitem->url . ' ">
-			    <i class="fa fa-shopping-cart"></i>
-		    </a>';
-		    unset($menuitem->title);
+			echo ' <span class="fa-stack fa-2x has-badge" data-count="' . WC()->cart->get_cart_contents_count() . '">
+				<i class="fa fa-stack-2x"></i>
+				<i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+			</span> ';
+			unset($menuitem->title);
+	    } if($menuitem->title === 'My account'){
+			echo '<i class="fa fa-user"></i>';
+			unset($menuitem->title);
+	    } else{
+		    echo '<li class="nav-item">' . $menuitem->title . '</li>';
 	    }
-	    if($menuitem->title === 'My account'){
-		    echo '<a href=" ' . $menuitem->url . ' ">
-			    <i class="fa fa-user-circle"></i>
-		    </a>';
-		    unset($menuitem->title);
-	    }
+	echo '</a>';
     }
-    echo '<a href=" ' . $menuitem->url . ' ">
-	    <li class="nav-item">' . $menuitem->title . '</li>
-    </a>';
 }
-
-
-
-
