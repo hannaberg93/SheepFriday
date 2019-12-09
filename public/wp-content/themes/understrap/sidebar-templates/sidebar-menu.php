@@ -34,13 +34,13 @@ defined( 'ABSPATH' ) || exit;
 <div class="accordion pt-3" id="sidebar-menu">
   <?php 
     foreach ($all_categories as $cat) {
-      if($cat->category_parent == 0) {
+      if($cat->category_parent == 0 && $cat->slug !== 'uncategorized') {
           $category_id = $cat->term_id;
           ?>
           <div class="card border-0 rounded-0">
             <div class="card-header product-menu-category p-0 border-0 rounded-0" id="<?php echo $cat->slug ?>">
               <h2 class="mb-0">
-                <button class="btn p-0 pl-3 pt-2 pb-2" type="button" data-toggle="collapse" data-target="#collapse-<?php echo $cat->slug ?>" aria-expanded="true" aria-controls="collapse-<?php echo $cat->slug ?>">
+                <button class="btn p-0 pl-3 pt-2 pb-2 w-100 text-left" type="button" data-toggle="collapse" data-target="#collapse-<?php echo $cat->slug ?>" aria-expanded="true" aria-controls="collapse-<?php echo $cat->slug ?>">
                   <?php 
                     switch ($cat->slug) {
                       case 'baked-goods':
@@ -87,10 +87,9 @@ defined( 'ABSPATH' ) || exit;
                   if($sub_cats) {
                     echo "<ul class='list-unstyled'>";
                       foreach($sub_cats as $sub_category) {
-                        echo '<li>
-                          <a href="'. get_term_link($sub_category->slug, 'product_cat') .'">'. $sub_category->name .'</a>
-                        </li>';
-                        // echo $sub_category->name;
+                        echo "<a class=href='link-unstyled'" . get_term_link($sub_category->slug, 'product_cat') . ">
+                          <li class='sub-cat-title'>" . $sub_category->name . '</li>
+                        </a>';
                       }
                     echo "</ul>";
                   }

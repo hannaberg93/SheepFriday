@@ -6,8 +6,17 @@
 
 .product-menu-category {
   background-color: #e9b872;
+  &:hover {
+    background-color: #f0c993;
+  }
 }
 
 .product-menu-sub-category {
   background-color: #facb88;
 }
+
+.sub-cat-title {
+    &:hover {
+      color: #b33101;
+    }
+  }
