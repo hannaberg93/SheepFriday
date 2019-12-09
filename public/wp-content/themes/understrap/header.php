@@ -61,7 +61,9 @@ $container = get_theme_mod( 'understrap_container_type' );
 						<i class="fa fa-bars"></i>
 						</a>
 
-						<!-- Dropdown content -->
+						<div class="dropdown-menu nav-categories" aria-labelledby="dropdownMenuButton">
+							<?php get_template_part( 'sidebar-templates/sidebar', 'menu' ); ?>
+						</div>
 					</div> <!-- ./categories-menu -->
 
 					<?php get_product_search_form(); ?>
@@ -78,4 +80,3 @@ $container = get_theme_mod( 'understrap_container_type' );
 			</nav>
 
 		</div><!-- #wrapper-navbar end -->
-

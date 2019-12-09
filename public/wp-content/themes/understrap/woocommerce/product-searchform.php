@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 <!-- Search dropdown, medium and small screens -->
-<div class="search-dropdown d-lg-none d-l-block" style="position: initial;">
+<div class="search-dropdown d-lg-none d-l-block">
 
 	<button class="search-button btn dropdown-toggle" type="button" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="<?php echo esc_attr_x( 'Search', 'understrap' ); ?>">
 		<i class="fa fa-search"></i>

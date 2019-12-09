@@ -40,7 +40,6 @@
 		.nav-item{
 			list-style-type: none;
 			color: gray;
-
 		}
 		a{
 			text-decoration: none;
@@ -58,6 +57,9 @@
 				padding: 0px;
 				width: 100%;
 				border:none;
+				.form-control{
+					min-height: 55px;
+				}
 			}
 			.search-button::after {
 				content: none;
@@ -78,6 +80,13 @@
 		}
 		.menu-items-left{
 			text-align: left;
+			.categories-menu{
+				position: initial;
+				.dropdown-menu{
+					padding: 0;
+					width: 50%;
+				}
+			}
 		}
 	}
 }
