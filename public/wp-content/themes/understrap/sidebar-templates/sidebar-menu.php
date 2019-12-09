@@ -38,9 +38,31 @@ defined( 'ABSPATH' ) || exit;
           $category_id = $cat->term_id;
           ?>
           <div class="card border-0 rounded-0">
-            <div class="card-header product-menu-category p-0 border-0" id="<?php echo $cat->slug ?>">
+            <div class="card-header product-menu-category p-0 border-0 rounded-0" id="<?php echo $cat->slug ?>">
               <h2 class="mb-0">
                 <button class="btn p-0 pl-3 pt-2 pb-2" type="button" data-toggle="collapse" data-target="#collapse-<?php echo $cat->slug ?>" aria-expanded="true" aria-controls="collapse-<?php echo $cat->slug ?>">
+                  <?php 
+                    switch ($cat->slug) {
+                      case 'baked-goods':
+                        echo "<i class='fa fa-bread-slice pr-2'></i>";
+                        break;
+                      case 'drinks':
+                        echo "<i class='fa fa-glass-whiskey pr-2'></i>";
+                        break;
+                      case 'fruit-vegetables':
+                        echo "<i class='fa fa-carrot pr-2'></i>";
+                        break;
+                      case 'meat':
+                        echo "<i class='fa fa-drumstick-bite pr-2'></i>";
+                        break;
+                      case 'milk-products':
+                        echo "<i class='fa fa-cheese pr-2'></i>";
+                        break;
+                      case 'snacks':
+                        echo "<i class='fa fa-cookie-bite pr-2'></i>";
+                        break;
+                  }
+                  ?>
                   <span><?php echo $cat->name ?></span>
                 </button>
               </h2>
