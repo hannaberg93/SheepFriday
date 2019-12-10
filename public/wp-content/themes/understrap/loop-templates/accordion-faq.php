@@ -4,7 +4,6 @@
     'order' => 'asc',
     'orderby' => 'title',
     'post_type' => 'faq',
-    'posts_per_page' => 5,
     'paged' => (get_query_var('paged')),
   ]);
   // om det finns några blogginlägg, starta en accordion
