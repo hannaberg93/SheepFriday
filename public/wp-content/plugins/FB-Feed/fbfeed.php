@@ -26,7 +26,8 @@ function output_FB_feed( $atts ) {
     $a = shortcode_atts( array(
        'app_id' => FB_APP_ID,
        'app_secret' => FB_APP_SECRET,
-       'access_token' => FB_ACCESS_TOKEN
+       'access_token' => FB_ACCESS_TOKEN,
+       'feed_limit' => ''
     ), $atts );
 
     $fb = new Facebook\Facebook([
@@ -50,33 +51,28 @@ function output_FB_feed( $atts ) {
     }
     $graphNode = $response->getGraphNode();
     $array = json_decode($graphNode,true);
-    
-    var_dump($array['feed']);
+    $feed = $array['feed'];
     //Scan thru the array feed retrieved from the json_decode
-    foreach ($array['feed'] as $item) {
+    foreach ($feed as $item) {
         //Check if $item is an array
-        if (is_array($item)){
-            //  Scan through inner loop
-            
-                // Returns id
-                var_dump($item['message']); 
-                // if ($array['feed'][$value]['attachments'][0]['media']['image']['src']){
-                //     $content .='<img src="' . $array['feed'][$value]['attachments'][0]['media']['image']['src'] . '"class="post-img" alt="Postpics" height="25%" width="50vw">';
+        if ($item["message"] && $item['attachments']){
+            // var_dump($item['message']);
+            // var_dump($item['attachments'][0]['media']['image']['src']);
+            $content .='<div>' . $item["message"] . '</div>';
+            $content .='<img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="post-img" alt="Postpics" height="100%" width="50vw">';
                 //     $content .='<div>' . $item["message"] . '</div>';
                 // }
     
-        $content = '<div id=#'.$item["id"].'>';
+        // $content = '<div id=#'.$item["id"].'>';
+        // $content .='</div>';
+        }
+        elseif ($item["message"] && !$item['attachments']) {
+            $content .='<div>' . $item["message"] . '</div>';
+        }
+        else {
             
-
-        $content .='</div>';
-        var_dump($content);
-        
+        }
     }
-    else {
-        $content .='<div>' . $item["message"] . '</div>';
-    }
-
     return $content;
-    }
 }
 add_shortcode( 'facebookfeed', 'output_FB_feed' );
