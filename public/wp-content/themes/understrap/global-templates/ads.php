@@ -19,20 +19,25 @@ $ads = new WP_Query([
 	'post_type' => 'ad',
 	'posts_per_page' => 2,
 	'orderby' => 'date',
+  'order' => 'asc',
 ]);
 ?>
 
 <?php if ($ads->have_posts()) : ?>
-  <div class='row no-gutters'>
-    <?php
-      while ($ads->have_posts()) {
-        $ads->the_post();
-        get_template_part('loop-templates/content', 'ad'); 
-      }
 
-      wp_reset_postdata();
-    ?>
-  </div><!-- .row -->
+  <div class="container">
+    <div class='row no-gutters'>
+      <?php
+        while ($ads->have_posts()) {
+          $ads->the_post();
+          get_template_part('loop-templates/content', 'ad'); 
+        }
+
+        wp_reset_postdata();
+      ?>
+    </div><!-- .row -->
+  </div><!-- .container -->
+  
 <?php endif; ?>
 
 <?php 
