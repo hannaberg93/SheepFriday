@@ -31,7 +31,7 @@ function output_FB_feed( $atts ) {
 
     try {
         $response = $fb->get(
-        '/sheepfriday/?fields=feed.limit('. $a['feed_limit'] .'){message,attachments}',
+        '/sheepfriday/?fields=feed.limit('. $a['feed_limit'] .'){message,attachments},picture,name',
         FB_ACCESS_TOKEN
         );
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
@@ -46,11 +46,11 @@ function output_FB_feed( $atts ) {
     $feed = $array['feed'];
     foreach ($feed as $item) {
         if ($item["message"] && $item['attachments']){
-            $content .='<div class="card p-2 mt-2 d-flex w-3 text-center shadow bg-white rounded">' . $item["message"];
-            $content .='<img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 w-75 mx-auto" alt="Postpics"></div>';
+            $content .='<div class="card p-2 mt-2 shadow bg-white rounded"><div class="d-inline"><img src="'. $array['picture']['url'] .'"><h2 class="d-inline ml-2">'.$array['name'].'</h2><hr></div><div><p>' . $item["message"] . '</p></div>';
+            $content .='<img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-75 mx-auto" alt="Postpics"></div>';
         }
         elseif ($item["message"] && !$item['attachments']) {
-            $content .='<div class="card p-2 mt-2 shadow bg-white rounded">' . $item["message"] . '</div>';
+            $content .='<div class="card p-2 mt-2 shadow bg-white rounded"><div class="d-inline"><img src="'. $array['picture']['url'] .'"><h2 class="d-inline ml-2">'.$array['name'].'</h2><hr></div><div><p>' . $item["message"] . '</p></div></div>';
         }
         else {
             
