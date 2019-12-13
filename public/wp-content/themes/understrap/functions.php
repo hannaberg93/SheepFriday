@@ -63,3 +63,32 @@ function sheep_get_menu_items() {
 	echo '</a>';
     }
 }
+
+
+/**
+ * Shipping by Weight
+ */
+  
+add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shipping', 9999, 2 );
+    
+function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
+     
+     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
+       
+     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
+       
+     } else {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:12'] );
+       
+     } 
+
+    
+     return $rates;
+    
+}
+
