@@ -1,0 +1,14 @@
+.sheep-ad {
+  padding: 0.5rem;
+  &:hover {
+    background-color: rgb(220, 220, 255);
+  }
+}
+
+.sheep-ad-link {
+  color: black;
+  &:hover {
+    color: black;
+    text-decoration: none;
+  }
+}

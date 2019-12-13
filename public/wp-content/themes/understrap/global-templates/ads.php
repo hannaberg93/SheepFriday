@@ -26,7 +26,7 @@ $ads = new WP_Query([
 <?php if ($ads->have_posts()) : ?>
 
   <div class="container">
-    <div class='row no-gutters'>
+    <div class='row justify-content-center'>
       <?php
         while ($ads->have_posts()) {
           $ads->the_post();
