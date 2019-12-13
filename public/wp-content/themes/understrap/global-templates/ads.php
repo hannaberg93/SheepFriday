@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 // $container = get_theme_mod( 'understrap_container_type' );
 
 $ads = new WP_Query([
-	'post_type' => 'ad',
+	'post_type' => 'sheep_ad',
 	'posts_per_page' => 2,
 	'orderby' => 'date',
   'order' => 'asc',
