@@ -92,3 +92,34 @@ function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
     
 }
 
+/**
+ * Show product weight on archive pages
+ */
+add_action( 'woocommerce_after_shop_loop_item', 'sheep_show_weights', 9 );
+
+function sheep_show_weights() {
+
+    global $product;
+    $weight = $product->get_weight();
+
+    if ( $product->has_weight() ) {
+        echo '<div class="product-meta"><span class="product-meta-label">' . __('Weight:', 'understrap') . ' </span>' . $weight . ' ' . get_option('woocommerce_weight_unit') . '</div></br>';
+    }
+}
+
+
+/**
+* Display the weight in cart and checkout page
+*/
+add_filter( 'woocommerce_get_item_data', 'display_weight_data', 10, 2 );
+function display_weight_data( $cart_item_data, $cart_item ) {
+    if ( $cart_item['data']->get_weight() > 0 ){
+        $cart_item_data[] = array(
+            'name' => __( 'Weight', 'understrap' ),
+            'value' =>  $cart_item['data']->get_weight()  . ' ' . get_option('woocommerce_weight_unit')
+        );
+    } 
+    
+    return $cart_item_data;
+}
+
