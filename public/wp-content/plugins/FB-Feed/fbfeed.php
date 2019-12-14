@@ -8,31 +8,40 @@
  * Author URI:  https://pluginseverywhere.noooo
  * License:     WTFPL
  * License URI: http://www.wtfpl.net/
- * Text Domain: wcms18-starwars
+ * Text Domain: Fab Plugin
  * Domain Path: /languages
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-include 'sf-feed-tokens.php';
+require_once "includes/class-FB_Keys.php";
+require_once "includes/class-FB_Settup.php";
+
 function output_FB_feed( $atts ) {
+    $keys = new FB_Keys("2221274434844713","48403dbaeba50a4d7f926016e957610f");
 
     $a = shortcode_atts( array(
-       'app_id' => FB_APP_ID,
-       'app_secret' => FB_APP_SECRET,
-       'access_token' => false, //FB_ACCESS_TOKEN
-       'feed_limit' => 2
+    'app_id' => $keys->set_ID(), //Set the ID thru the keys object.
+    'app_secret' => $keys->set_Secret(), //Set the secret thru the keys object.
+    'access_token' => false, //Use false as default, force user to put access token as argument.
+    'feed_limit' => 2
     ), $atts );
 
+    //Set object with values needed.
+    $url = new FB_settup($a['feed_limit'],['message','attachments','created_time'],['subattachments','media']);
+
+    //Convert object to facebook endpoint.
+    $endpoint = $url->convert_to_url($a['feed_limit'],['message','attachments','created_time'],['subattachments','media']);
+
     $fb = new Facebook\Facebook([
-        'app_id' => $a['app_id'],
-        'app_secret' => $a['app_secret'],
+        'app_id' => $a['app_id'], //Use incoming argument as app ID
+        'app_secret' => $a['app_secret'], //Use incoming argument as app Secret
         'default_graph_version' => 'v3.1'
     ]);
 
     try {
         $response = $fb->get(
-        '/sheepfriday/?fields=feed.limit('. $a['feed_limit'] .'){message,attachments,created_time{subattachments,media}},picture,name',
-        $a['access_token']//FB_ACCESS_TOKEN
+        $endpoint,
+        $a['access_token']
         );
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
         echo 'Graph returned an error: ' . $e->getMessage();
@@ -63,7 +72,6 @@ function output_FB_feed( $atts ) {
             //Check for several images
             if ($item['attachments'][0]['subattachments']) {
                 foreach ($item['attachments'][0]['subattachments'] as $img){
-                    var_dump($img['media']['image']['src']);
                     $content .= '<img src="' . $img['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-45 mx-auto" alt="Postpics">';
                 }  
                     $content .= '<p class="font-italic">' . date('Y jS  F h:i', strtotime($item['created_time']['date'])) . '</p>
@@ -86,7 +94,7 @@ function output_FB_feed( $atts ) {
                         </div>';
         }
         else {
-            
+
         }
     }
     return $content;
