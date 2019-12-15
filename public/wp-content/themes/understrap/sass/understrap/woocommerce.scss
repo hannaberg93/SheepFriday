@@ -11,23 +11,11 @@
 @import "../../../../plugins/woocommerce/assets/css/_variables";
 @import "../../../../plugins/woocommerce/assets/css/_animation";
 @import "../../../../plugins/woocommerce/assets/css/_fonts";
+@import "../theme/products";
 
 /**
  * Global styles
  */
-.price-on-image {
-  color: white;
-  min-width: 50px;
-  background-color: rgb(249, 99, 99);
-  border-radius: 10% 50% 50% 10%;
-  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
-  position: absolute;
-  top: 0;
-  right: auto;
-  margin: -.5rem -.5rem 0 0;
-  font-size: 1.4rem;
-  z-index: 9;
-}
 
 p.demo_store,
 .woocommerce-store-notice {

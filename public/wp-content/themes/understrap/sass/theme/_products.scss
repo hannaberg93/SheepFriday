@@ -1,0 +1,30 @@
+.price-on-image {
+  color: white;
+  min-width: 50px;
+  border: 2px solid rgb(46, 46, 46);
+  background-color: rgb(249, 99, 99);
+  border-radius: 10% 50% 50% 10%;
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+  position: absolute;
+  font-size: 1.4rem;
+  z-index: 9;
+
+  &.loop {
+    margin: -.5rem -.5rem 0 0;  
+  }
+
+  &.single {
+    margin: -.5rem -.5rem 0 3rem;
+  }
+}
+
+.sheep_product_list_cart {
+  display: flex;
+  flex-wrap: wrap;
+  & .sheep_cart_quantity {
+    flex-basis: 100%;
+    & input {
+      height: 100%;
+    }
+  }
+}

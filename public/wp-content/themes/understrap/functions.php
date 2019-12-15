@@ -63,3 +63,29 @@ function sheep_get_menu_items() {
 	echo '</a>';
     }
 }
+
+add_filter( 'woocommerce_loop_add_to_cart_link', 'quantity_inputs', 10, 2 );
+  function quantity_inputs( $html, $product ) {
+    foreach ( WC()->cart->get_cart() as $cart_item ) { 
+      $qty = '';
+      if($cart_item['product_id'] == $product->get_id() ){
+        if (isset($cart_item['quantity'])) {
+          $qty =  $cart_item['quantity'];
+        }
+        break;
+      }
+    }
+
+    if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
+      $html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="sheep_product_list_cart" method="post" enctype="multipart/form-data">';
+      $html .= '<span class="sheep_cart_quantity text-warning pb-2 mt-2">';
+      if ( $qty !== '') {
+        $html .= 'In cart: ' . $qty;
+      }
+      $html .= '</span>';
+      $html .= woocommerce_quantity_input( array(), $product, false );
+      $html .= '<button type="submit" class="btn btn-primary flex-grow-1">' . esc_html( $product->add_to_cart_text() ) . '</button>';
+      $html .= '</form>';
+    }
+  return $html;
+}

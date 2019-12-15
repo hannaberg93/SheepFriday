@@ -34,9 +34,7 @@ $wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_cl
 ) );
 ?>
 <div class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
-	<?php if ( $price_html = $product->get_price_html() ) : ?>
-    <span class='price-on-image'><?php echo $product->price . ':-'; ?></span>
-  <?php endif; ?>
+  <span class='price-on-image single'><?php echo $product->get_price() . ':-'; ?></span>
   <figure class="woocommerce-product-gallery__wrapper">
 		<?php
 		if ( $product->get_image_id() ) {

@@ -23,7 +23,19 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
+
+$product_id = $product->get_id();
+
+$qty = 0;
+
+foreach ( WC()->cart->get_cart() as $cart_item ) { 
+  if($cart_item['product_id'] == $product_id ){
+    $qty =  $cart_item['quantity'];
+    break;
+  }
+}
 ?>
+
 <li <?php wc_product_class( '', $product ); ?>>
 	<?php
 	/**
@@ -40,7 +52,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_template_loop_product_thumbnail - 10
 	 */
   echo "<div>";
-    echo "<span class='price-on-image'>" . $product->price . ":-</span>";
+    echo "<span class='price-on-image loop'>" . $product->get_price() . ":-</span>";
     do_action( 'woocommerce_before_shop_loop_item_title' );
   echo "</div>";
 	/**
@@ -66,5 +78,9 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
   
-	?>
+
+  // var_dump($product);
+
+  ?>
+
 </li>
