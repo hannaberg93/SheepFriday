@@ -74,6 +74,7 @@ if ( woocommerce_product_loop() ) {
 
 	woocommerce_product_loop_end();
 
+  // After products show ads
   wc_get_template_part('ads');
 
 	/**

@@ -13,36 +13,48 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-// $container = get_theme_mod( 'understrap_container_type' );
-
+// Get all ads
 $ads = new WP_Query([
 	'post_type' => 'sheep_ad',
-	'posts_per_page' => 2,
 	'orderby' => 'date',
   'order' => 'asc',
 ]);
 
+$adsCount = count($ads->posts);
+
+$adIndexesToShow = [];
+$adsToShow = [];
+
+// Select 2 random ads to show
+while (count($adIndexesToShow) < 2) {
+  $postIndex = rand(0, $adsCount -1);
+  if ( ! in_array($postIndex, $adIndexesToShow)) {
+    $adIndexesToShow[] = $postIndex;
+    $adsToShow[] = $ads->posts[$postIndex]->ID;
+  }
+}
 ?>
-
-
 
 <?php if ($ads->have_posts()) : ?>
 
-  <div class="sheep_ad_container">
+  <div class="sheep_ads_container">
     <div class="container">
       <div class="row justify-content-center">
 
         <?php while ($ads->have_posts()) {
           $ads->the_post();
-          wc_get_template_part( 'loop/ad' );
+          foreach ($adsToShow as $adID) {
+            if ( get_the_ID() === $adID ) {
+              wc_get_template_part( 'loop/ad' );
+            }
+          }
         } ?>
 
-      </div>
-    </div>
-  </div><!-- .container -->
+
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </div><!-- .sheep_ads_container -->
 
 <?php wp_reset_postdata(); ?>
   
-<?php endif; ?>
-
-<?php 
+<?php endif;
