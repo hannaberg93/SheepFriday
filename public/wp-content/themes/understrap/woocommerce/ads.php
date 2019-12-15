@@ -21,22 +21,27 @@ $ads = new WP_Query([
 	'orderby' => 'date',
   'order' => 'asc',
 ]);
+
 ?>
+
+
 
 <?php if ($ads->have_posts()) : ?>
 
-  <div class="container">
-    <div class='row justify-content-center'>
-      <?php
-        while ($ads->have_posts()) {
-          $ads->the_post();
-          get_template_part('loop-templates/content', 'ad'); 
-        }
+  <div class="sheep_ad_container">
+    <div class="container">
+      <div class="row justify-content-center">
 
-        wp_reset_postdata();
-      ?>
-    </div><!-- .row -->
+        <?php while ($ads->have_posts()) {
+          $ads->the_post();
+          wc_get_template_part( 'loop/ad' );
+        } ?>
+
+      </div>
+    </div>
   </div><!-- .container -->
+
+<?php wp_reset_postdata(); ?>
   
 <?php endif; ?>
 

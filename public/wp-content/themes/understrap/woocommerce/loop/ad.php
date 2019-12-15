@@ -1,4 +1,4 @@
-<div class="sheep-ad col-12 col-sm-6 col-lg-4">
+<div class="sheep-ad col-12 col-sm-6 col-lg-4 pt-3">
   <a class="sheep-ad-link" href="<?php echo get_field('link') ?>">
     <div class="row">
       <div class="col-12 pb-2">
