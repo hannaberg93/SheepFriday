@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Package Name\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-23 13:22+0200\n"
+"PO-Revision-Date: 2019-06-27 02:42-0500\n"
+"Last-Translator: Oscar Lora\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+#. Description of the plugin
+msgid ""
+"Adds professionally looking \"-\" and \"+\" buttons around product quantity "
+"field, on product and cart page."
+msgstr ""
+"Añade botones \"-\" y \"+\" de aspecto profesional a los lados del campo de "
+"cantidad de producto en la página del producto y carrito."
+
+msgid "Archives display"
+msgstr "Visualización de productos"
+
+msgid "Archive position"
+msgstr "Posición de listado de productos"
+
+msgid "Before Add to cart"
+msgstr "Antes del botón añadir al carrito"
+
+msgid "After Add to cart"
+msgstr "Después del botón añadir al carrito"
+
+msgid "Load on all pages"
+msgstr "Cargar en todas las páginas"
+
+msgid "Auto cart columns"
+msgstr "Columnas de carrito automáticas"
+
+msgid "Merge buttons"
+msgstr "Fusionar botones"
+
+msgid "Cart page align"
+msgstr "Alinear página del carrito"
+
+msgid "Button style"
+msgstr "Estilo de los botones"
+
+msgid "Button height"
+msgstr "Alto de los botones"
+
+msgid "Button width"
+msgstr "Ancho de los botones"
+
+msgid "Quantity field width"
+msgstr "Ancho del campo de cantidad"
+
+msgid "Support & suggestions"
+msgstr "Soporte y sugerencias"
+
+msgid "Rate this plugin"
+msgstr "Califica este plugin"
+
+msgid "Settings"
+msgstr "Ajustes"
+
+msgid "None"
+msgstr "Ninguno"
+
+msgid "Shop"
+msgstr "Tienda"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Shop & Category"
+msgstr "Tienda y categoría"
+
+msgid ""
+"Archive pages that should display quantity input field and increment "
+"buttons. Doesn't affect variable products and products sold individually."
+msgstr ""
+"Páginas de archivos que deberían mostrar el campo de cantidad y botones "
+"aumentar/disminuir. No afecta productos variables y productos vendidos "
+"individualmente."
+
+msgid ""
+"Position of quantity input field and increment buttons in HTML structure "
+"of archives. Visual position may be different depending on float. "
+"\"After Add to cart\" is the only way to keep all these elements in one line "
+"on some themes."
+msgstr ""
+"Posición del campo de cantidad y de disminuir/incrementar en estructura HTML. "
+"La posición visualmente puede ser diferente  dependiendo del float. "
+"\"Después de añadir al carrito\" es la única manera de mantener todos estos "
+"elementos en la misma linea en algunos temas."
+
+msgid ""
+"Check to enable the plugin on pages other than product, cart, checkout, shop, "
+"category and correctly display Quick Views initiated from these pages."
+msgstr ""
+"Marcalo para habilitar el plugin en páginas diferentes a las de producto, "
+"carrito, finalizar-compra (checkout), tienda, categorías; y mostrar correctamente "
+"Vista Rápida inicializada desde estas páginas."
+
+msgid ""
+"Check if you notice buttons overflowing to next column or breaking to next "
+"line on the cart page."
+msgstr ""
+"Verifica si los botones de aumentar/disminuir sobresalen o se desacomodan "
+"después de la columna en la siguiente línea en la página del carrito."
+
+msgid ""
+"Auto sizes columns on the cart page. Already used by a vast majority of "
+"themes. Alternatively merge buttons and reduce widths to fit into fixed-size "
+"column."
+msgstr ""
+"Ajusta las medidas de las columnas automáticamente en la página del carrito. "
+"Ya se usa en la mayoría de temas. Alternativamente fusiona los botones y "
+"reduce el ancho para encajar en la medida columna de tamaño fijo."
+
+msgid ""
+"Remove space between increment buttons and quantity input field, visually "
+"merging these elements."
+msgstr ""
+"Elimina el espacio entre los botones de aumentar/disminuiry el campo de "
+"cantidad fusionando visualmente estos elementos."
+
+msgid "Left"
+msgstr "Izquierda"
+
+msgid "Center"
+msgstr "Centro"
+
+msgid "Right"
+msgstr "Derecha"
+
+msgid ""
+"Horizontal alignment in cart page quantity column. Affects input field and "
+"increment buttons. Desktop view only."
+msgstr ""
+"Alineación horizontal en la columna de cantidad en la página del carrito. "
+"Afecta el campo de cantidad."
+
+msgid "Black"
+msgstr "Negro"
+
+msgid "Blue"
+msgstr "Azul"
+
+msgid "Brown"
+msgstr "Café"
+
+msgid "Orange"
+msgstr "Naranja"
+
+msgid "Red"
+msgstr "Rojo"
+
+msgid "Silver"
+msgstr "Gris"
+
+msgid ""
+"Includes button colors (background, "
+"font, hover background, focus outline), button styles (focus outline) and "
+"quantity input field colors (border). You can adjust this style within "
+"your child theme CSS or additional CSS if your theme allows it."
+msgstr ""
+"Esta incluye colores de botones (fondo, fondo al "
+"pasar, fuente, esquema de enfoque), el estilo del botón (esquemas de "
+"enfoque) y el color del campo de cantidad (bordes). Puedes ajustar este "
+"estilo dentro del estilo de tu tema hijo o agregarlo al css adicional si tu "
+"tema te lo permite."
+
+msgid ""
+"Recommended 25-40 pixels. Quantity input field and Add to cart button will "
+"have the same height."
+msgstr ""
+"Recomendamos 25-40 pixeles. El campo de cantidad y el botón de añadir al "
+"carrito tendrán el mismo alto."
+
+msgid "Recommended 25-40 pixels."
+msgstr "Recomendamos 25-40 pixeles."
+
+msgid "Recommended 35-50 pixels."
+msgstr "Recomendamos 35-50 pixeles."

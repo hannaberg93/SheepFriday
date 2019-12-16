@@ -28,6 +28,9 @@ $container = get_theme_mod( 'understrap_container_type' );
 
     <div class='col'>
       <div class="wrapper" id="page-wrapper">
+                      <div class="ads">
+                <?php get_template_part('global-templates/ads') ?>
+              </div>
         <div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
           <div class="row">
             <main class="site-main" id="main">
