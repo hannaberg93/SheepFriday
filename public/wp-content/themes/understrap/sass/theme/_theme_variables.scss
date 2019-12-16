@@ -3,4 +3,24 @@
 // Just copy a variable from src/sass/bootstrap4/_variables.scss, paste it here and edit the value.
 
 
-$primary: #5533ff; // Thats a sample how you could change a BootStrap variable.
+$primary: #5533ff; // Thats a sample how you could change a BootStrap variable..
+
+@mixin respond-to($breakpoint) {
+	@if $breakpoint == "small" {
+	  @media (max-width: 767px) {
+	    @content;
+	  }
+	}
+
+	@else if $breakpoint == "medium" {
+	  @media (max-width: 992px) {
+	    @content;
+	  }
+	}
+
+	@else if $breakpoint == "large" {
+	  @media (max-width: 1200px) {
+	    @content;
+	  }
+	}
+   }

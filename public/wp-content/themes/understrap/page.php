@@ -20,10 +20,9 @@ $container = get_theme_mod( 'understrap_container_type' );
 ?>
 
 
-  
-  <div class='row'>
+  <div class='row no-gutters'>
 
-    <div class='col-2 col-sm-4 col-md-3 col-lg-2 d-none d-sm-block'>
+    <div class='col-2 col-sm-4 col-md-3 col-lg-2 d-none d-lg-block'>
       <?php get_template_part( 'sidebar-templates/sidebar', 'menu' ); ?>
     </div>
 
@@ -43,7 +42,8 @@ $container = get_theme_mod( 'understrap_container_type' );
 
   </div><!-- .row -->
 
-	
+
+
 
 
 
