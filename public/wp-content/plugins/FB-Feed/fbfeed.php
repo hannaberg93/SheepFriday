@@ -13,13 +13,14 @@
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once "includes/class-FB_Keys.php";
-require_once "includes/class-FB_Settup.php";
-require_once "includes/class-FB_Loop.php";
-require_once "includes/class-FB_Connect.php";
+require_once "includes/Class-FB_Keys.php";
+require_once "includes/Class-FB_Url_Settup.php";
+require_once "includes/Class-FB_Loop.php";
+require_once "includes/Class-FB_Connect.php";
+include "settings/settings.php";
 
-function output_FB_feed( $atts ) {
-    $keys = new FB_Keys("2221274434844713","48403dbaeba50a4d7f926016e957610f");
+function sheep_output_FB_feed( $atts ) {
+    $keys = new FB_Keys(APP_ID, APP_SECRET);
 
     $a = shortcode_atts( array(
     'app_id' => $keys->set_ID(), //Set the ID thru the keys object.
@@ -29,24 +30,21 @@ function output_FB_feed( $atts ) {
     ), $atts );
 
     //Set object with values needed.
-    $url = new FB_settup($a['feed_limit'],['message','attachments','created_time'],['subattachments','media']);
+    $url = new FB_url_settup($a['feed_limit'],['message','attachments','created_time'],['subattachments','media']);
 
     //Convert object to facebook endpoint.
     $endpoint = $url->convert_to_url($a['feed_limit'],['message','attachments','created_time'],['subattachments','media']);
 
-    //Set Keys & Token needed for API call as a variables
-    $accessToken = $a['access_token'];
-    $appID = $a['app_id'];
-    $appSecret = $a['app_secret'];
-
     //Create a new connection
     $connection = new FB_Connect;
-    $connection->connect($appID,$appSecret,$endpoint,$accessToken);
+    $connection->connect($a['app_id'],$a['app_secret'],$endpoint,$a['access_token']);
 
-    //Loop over the facebook feed
+    //Convert he JSON to PHP array
     $array = json_decode($connection->get_graphNode(),true);
     $feed = $array['feed'];
+
+    //Loop over the array
     $loop = new FB_Loop;
     return $loop->loop_over_FB_feed($feed,$array);
 }
-add_shortcode( 'facebookfeed', 'output_FB_feed' );
+add_shortcode( 'facebookfeed', 'sheep_output_FB_feed' );
