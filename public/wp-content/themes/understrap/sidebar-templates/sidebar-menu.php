@@ -87,8 +87,8 @@ defined( 'ABSPATH' ) || exit;
                   if($sub_cats) {
                     echo "<ul class='list-unstyled'>";
                       foreach($sub_cats as $sub_category) {
-                        echo "<a class=href='link-unstyled'" . get_term_link($sub_category->slug, 'product_cat') . ">
-                          <li class='sub-cat-title'>" . $sub_category->name . '</li>
+                        echo "<a class='sub-cat-title' href='" . get_term_link($sub_category->slug, 'product_cat') . "'>
+                          <li>" . $sub_category->name . '</li>
                         </a>';
                       }
                     echo "</ul>";

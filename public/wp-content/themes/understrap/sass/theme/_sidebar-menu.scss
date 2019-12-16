@@ -16,7 +16,10 @@
 }
 
 .sub-cat-title {
+  color: black;
+  text-decoration: none;
     &:hover {
       color: #b33101;
+      text-decoration: none;
     }
   }
