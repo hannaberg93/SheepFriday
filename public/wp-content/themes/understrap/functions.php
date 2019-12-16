@@ -63,3 +63,76 @@ function sheep_get_menu_items() {
 	echo '</a>';
     }
 }
+
+/**
+ * Change a currency symbol
+ */
+add_filter('woocommerce_currency_symbol', 'change_existing_currency_symbol', 10, 2);
+
+function change_existing_currency_symbol( $currency_symbol, $currency ) {
+     switch( $currency ) {
+          case 'SEK': $currency_symbol = ':-'; break;
+     }
+     return $currency_symbol;
+}
+
+
+/**
+ * Shipping by Weight
+ */
+  
+add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shipping', 9999, 2 );
+    
+function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
+     
+     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
+       
+     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
+       
+     } else {
+       
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:12'] );
+       
+     } 
+
+    
+     return $rates;
+    
+}
+
+/**
+ * Show product weight on archive pages
+ */
+add_action( 'woocommerce_after_shop_loop_item', 'sheep_show_weights', 9 );
+
+function sheep_show_weights() {
+
+    global $product;
+    $weight = $product->get_weight();
+
+    if ( $product->has_weight() ) {
+        echo '<div class="product-meta"><span class="product-meta-label">' . __('Weight:', 'understrap') . ' </span>' . $weight . ' ' . get_option('woocommerce_weight_unit') . '</div></br>';
+    }
+}
+
+
+/**
+* Display the weight in cart and checkout page
+*/
+add_filter( 'woocommerce_get_item_data', 'display_weight_data', 10, 2 );
+function display_weight_data( $cart_item_data, $cart_item ) {
+    if ( $cart_item['data']->get_weight() > 0 ){
+        $cart_item_data[] = array(
+            'name' => __( 'Weight', 'understrap' ),
+            'value' =>  $cart_item['data']->get_weight()  . ' ' . get_option('woocommerce_weight_unit')
+        );
+    } 
+    
+    return $cart_item_data;
+}
+
+

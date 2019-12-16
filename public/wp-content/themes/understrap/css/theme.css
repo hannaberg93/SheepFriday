@@ -2867,6 +2867,8 @@ input[type="button"].btn-block {
   align-items: flex-start;
   justify-content: center; }
 
+  
+
   .btn-group-vertical > .btn,
   .wpcf7 .btn-group-vertical > input[type=submit],
   .btn-group-vertical > .btn-group {
@@ -10791,6 +10793,8 @@ figure.woocommerce-product-gallery__wrapper {
 .page-id-60 .wp-block-columns {
   margin-top: 40px; }
 
+
+
 #sidebar-menu {
   width: 100%;
   height: 100%;
@@ -10801,6 +10805,8 @@ figure.woocommerce-product-gallery__wrapper {
 
 .product-menu-sub-category {
   background-color: #facb88; }
+
+
 
 .footer-dark {
   padding: 50px 0;
@@ -10872,3 +10878,54 @@ figure.woocommerce-product-gallery__wrapper {
     .footer-dark .item.social {
       text-align: center;
       margin-top: 20px; } }
+
+
+
+.page-id-183 .faq-header-content {
+  text-align: center; }
+
+.page-id-183 .panel-default > .panel-heading {
+  background-color: transparent;
+  border: medium none;
+  border-radius: 0;
+  color: inherit;
+  padding: 0;
+  position: relative; }
+
+.page-id-183 .panel-heading .panel-title > a {
+  background-color: #87C540;
+  border: medium none;
+  color: #ffffff;
+  display: block;
+  font-family: Arial,Helvetica,sans-serif;
+  line-height: 28px;
+  padding: 11px 65px 11px 40px;
+  word-wrap: break-word; }
+  @media only screen and (max-width: 600px) {
+    .page-id-183 .panel-heading .panel-title > a {
+      font-size: 13px; } }
+
+.page-id-183 .panel-heading .panel-title > a::after {
+  bottom: 0;
+  content: "▲";
+  font-family: "Roboto",sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 48px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 60px; }
+
+.page-id-183 .panel-heading .panel-title > a.collapsed::after {
+  content: "▼"; }
+
+.page-id-183 .panel-body {
+  height: 100px;
+  overflow: auto; }
+  @media only screen and (max-width: 600px) {
+    .page-id-183 .panel-body {
+      height: 150px; } }
+
