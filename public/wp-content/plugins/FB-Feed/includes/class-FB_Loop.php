@@ -8,7 +8,7 @@ class FB_Loop{
     function loop_over_FB_feed($feed,$array){
         foreach ($feed as $item) {
             //check for an image
-            if ($item["message"] && $item['attachments']){
+            if ($item["message"] && isset($item['attachments'])){
                 $content .='<div class="card p-2 mt-2 shadow bg-white rounded d-flex">
                                 <div class="d-inline-flex">
                                     <img src="'. $array['picture']['url'] .'"><h2 class="d-inline-flex ml-2">'.$array['name'].'</h2><hr>
@@ -17,7 +17,7 @@ class FB_Loop{
                                 <p>' . $item["message"] . '</p>
                             </div>';
                 //Check for several images
-                if ($item['attachments'][0]['subattachments']) {
+                if (isset($item['attachments'][0]['subattachments'])) {
                     $content .= "<div class='row d-inline-flex'>";
                     foreach ($item['attachments'][0]['subattachments'] as $img){
                         $content .= "<div class='col-12 col-md-3'>";
@@ -33,8 +33,8 @@ class FB_Loop{
                 }
             }
             //if no attachments are set render out only the message
-            elseif ($item["message"] && !$item['attachments']) {
-                $content .='<div class="card p-2 mt-2 shadow bg-white rounded">
+            elseif ($item["message"] && !isset($item['attachments'])) {
+                $content ='<div class="card p-2 mt-2 shadow bg-white rounded">
                                 <div class="d-inline">
                                     <img src="'. $array['picture']['url'] .'"><h2 class="d-inline ml-2">'.$array['name'].'</h2><hr>
                                 </div>
