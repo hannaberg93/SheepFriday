@@ -21,7 +21,7 @@ include "settings/settings.php";
 
 function activate_fbfeed() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
-	FB_Deactivate::deactivate();
+	FB_Activate::activate();
 }
 
 function deactivate_fbfeed() {
