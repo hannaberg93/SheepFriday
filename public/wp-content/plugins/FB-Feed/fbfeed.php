@@ -19,6 +19,21 @@ require_once "includes/Class-FB_Loop.php";
 require_once "includes/Class-FB_Connect.php";
 include "settings/settings.php";
 
+function activate_fbfeed() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
+	FB_Deactivate::deactivate();
+}
+
+function deactivate_fbfeed() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Deactivator.php';
+	FB_Deactivate::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_fbfeed' );
+register_deactivation_hook( __FILE__, 'deactivate_fbfeed' );
+
+
+
 function sheep_output_FB_feed( $atts ) {
     $keys = new FB_Keys(APP_ID, APP_SECRET);
 
@@ -47,4 +62,4 @@ function sheep_output_FB_feed( $atts ) {
     $loop = new FB_Loop;
     return $loop->loop_over_FB_feed($feed,$array);
 }
-add_shortcode( 'facebookfeed', 'sheep_output_FB_feed' );
+add_shortcode( 'sheep_facebookfeed', 'sheep_output_FB_feed' );
