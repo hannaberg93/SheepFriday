@@ -17,7 +17,7 @@ require_once "includes/Class-FB_Keys.php";
 require_once "includes/Class-FB_Url_Settup.php";
 require_once "includes/Class-FB_Loop.php";
 require_once "includes/Class-FB_Connect.php";
-require_once "includes/Class-FB_Setting.php";
+require_once "includes/Class-FB_Setting.php"; //Do I need this?
 include "settings/settings.php";
 
 function activate_fbfeed() {
@@ -41,7 +41,7 @@ function sheep_output_FB_feed( $atts ) {
     $a = shortcode_atts( array(
     'app_id' => $keys->set_ID(), //Set the ID thru the keys object.
     'app_secret' => $keys->set_Secret(), //Set the secret thru the keys object.
-    'access_token' => false, //Use false as default, force user to put access token as argument.
+    'access_token' => ACCESSTOKEN, //Use false as default, force user to put access token as argument.
     'feed_limit' => 2
     ), $atts );
 
@@ -62,5 +62,6 @@ function sheep_output_FB_feed( $atts ) {
     //Loop over the array
     $loop = new FB_Loop;
     return $loop->loop_over_FB_feed($feed,$array);
+
 }
 add_shortcode( 'sheep_facebookfeed', 'sheep_output_FB_feed' );

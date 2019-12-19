@@ -1,5 +1,5 @@
 <?php
-class MySettingsPage
+class FB_Feed_SettingsPage
 {
     /**
      * Holds the values to be used in the fields callbacks
@@ -65,15 +65,15 @@ class MySettingsPage
 
         add_settings_section(
             'setting_section_id', // ID
-            'My Custom Settings', // Title
+            'Facebook Feed Settings', // Title
             array( $this, 'print_section_info' ), // Callback
             'my-setting-admin' // Page
         );  
 
         add_settings_field(
-            'title', 
-            'Title', 
-            array( $this, 'title_callback' ), 
+            'accesstoken', 
+            'Accesstoken', 
+            array( $this, 'accesstoken_callback' ), 
             'my-setting-admin', 
             'setting_section_id'
         );      
@@ -86,12 +86,8 @@ class MySettingsPage
      */
     public function sanitize( $input )
     {
-        $new_input = array();
-        if( isset( $input['id_number'] ) )
-            $new_input['id_number'] = absint( $input['id_number'] );
-
-        if( isset( $input['title'] ) )
-            $new_input['title'] = sanitize_text_field( $input['title'] );
+        if( isset( $input['accesstoken'] ) )
+            $new_input['accesstoken'] = sanitize_text_field( $input['accesstoken'] );
 
         return $new_input;
     }
@@ -107,25 +103,14 @@ class MySettingsPage
     /** 
      * Get the settings option array and print one of its values
      */
-    public function id_number_callback()
+    public function accesstoken_callback()
     {
         printf(
-            '<input type="text" id="id_number" name="my_option_name[id_number]" value="%s" />',
-            isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
-        );
-    }
-
-    /** 
-     * Get the settings option array and print one of its values
-     */
-    public function title_callback()
-    {
-        printf(
-            '<input type="text" id="title" name="my_option_name[title]" value="%s" />',
-            isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
+            '<input type="text" id="accesstoken" name="my_option_name[accesstoken]" value="%s" />',
+            isset( $this->options['accestoken'] ) ? esc_attr( $this->options['accesstoken']) : ''
         );
     }
 }
 
 if( is_admin() )
-    $my_settings_page = new MySettingsPage();
+    $my_settings_page = new FB_Feed_SettingsPage();
