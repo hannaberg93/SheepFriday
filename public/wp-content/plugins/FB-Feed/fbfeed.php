@@ -17,6 +17,7 @@ require_once "includes/Class-FB_Keys.php";
 require_once "includes/Class-FB_Url_Settup.php";
 require_once "includes/Class-FB_Loop.php";
 require_once "includes/Class-FB_Connect.php";
+require_once "includes/Class-FB_Setting.php";
 include "settings/settings.php";
 
 function activate_fbfeed() {
