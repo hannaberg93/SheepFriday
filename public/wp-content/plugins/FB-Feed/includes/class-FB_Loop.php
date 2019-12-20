@@ -45,8 +45,9 @@ class FB_Loop{
                 $content .= "</div>"; //card ends here
                 }
 
+                //if only one image
                 elseif(isset($item['attachments']) && !isset($item['attachments'][0]['subattachments'])){
-                    $content .= '<img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-75 mx-auto" alt="Postpics"></div>';
+                    $content .= '<div class="col-12 col-md-3"><img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-75 mx-auto" alt="Postpics"></div></div>';
                 }
             }
         }
