@@ -39,7 +39,7 @@ class FB_Feed_SettingsPage
         $this->options = get_option( 'token' );
         ?>
         <div class="wrap">
-            <h1>Facebook Feed Settings</h1>
+            <h1><?php _e("Facebook Feed Settings") ?></h1>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
@@ -108,7 +108,7 @@ class FB_Feed_SettingsPage
      */
     public function print_section_info()
     {
-        print 'Enter your settings below:';
+         _e("Enter your settings below:");
     }
 
     /** 
