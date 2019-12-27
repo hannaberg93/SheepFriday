@@ -19,6 +19,15 @@ defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
 
+?>
+<div class='row no-gutters'>
+  <div class='col-2 col-sm-4 col-md-3 col-lg-2 d-none d-lg-block'>
+    <?php get_template_part( 'sidebar-templates/sidebar', 'menu' ); ?>
+  </div>
+  <div class='col'>
+
+<?php
+
 /**
  * Hook: woocommerce_before_main_content.
  *
@@ -105,5 +114,12 @@ do_action( 'woocommerce_after_main_content' );
  * @hooked woocommerce_get_sidebar - 10
  */
 do_action( 'woocommerce_sidebar' );
+
+?>
+
+  </div><!-- end .col -->
+</div><!-- end .row -->
+
+<?php
 
 get_footer( 'shop' );

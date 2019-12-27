@@ -20,57 +20,32 @@ $container = get_theme_mod( 'understrap_container_type' );
 ?>
 
 <?php if ( is_front_page() && is_home() ) : ?>
-	<?php get_template_part( 'global-templates/hero' ); ?>
+
 <?php endif; ?>
 
-<div class="wrapper" id="index-wrapper">
+  <div class='row no-gutters'>
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+    <div class='col-2 col-sm-4 col-md-3 col-lg-2 d-none d-lg-block'>
+      <?php get_template_part( 'sidebar-templates/sidebar', 'menu' ); ?>
+    </div>
 
-		<div class="row">
+    <div class='col'>
+      <div class="wrapper" id="page-wrapper">
+        <div class="ads">
+          <?php get_template_part('global-templates/ads') ?>
+        </div>
+        <div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+          <div class="row">
+            <main class="site-main" id="main">
+              <?php while ( have_posts() ) : the_post(); ?>
+                <?php get_template_part( 'loop-templates/content', 'page' ); ?>
+              <?php endwhile; // end of the loop. ?>
+            </main><!-- #main -->
+          </div><!-- .row -->
+        </div><!-- #content -->
+      </div><!-- #page-wrapper -->
+    </div><!-- .col -->
 
-			<!-- Do the left sidebar check and opens the primary div -->
-			<?php get_template_part( 'global-templates/left-sidebar-check' ); ?>
-
-			<main class="site-main" id="main">
-
-				<?php if ( have_posts() ) : ?>
-
-					<?php /* Start the Loop */ ?>
-
-					<?php while ( have_posts() ) : the_post(); ?>
-
-						<?php
-
-						/*
-						 * Include the Post-Format-specific template for the content.
-						 * If you want to override this in a child theme, then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-
-						get_template_part( 'loop-templates/content', get_post_format() );
-						?>
-
-					<?php endwhile; ?>
-
-				<?php else : ?>
-
-					<?php get_template_part( 'loop-templates/content', 'none' ); ?>
-
-				<?php endif; ?>
-
-			</main><!-- #main -->
-
-			<!-- The pagination component -->
-			<?php understrap_pagination(); ?>
-
-			<!-- Do the right sidebar check -->
-			<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
-
-		</div><!-- .row -->
-
-	</div><!-- #content -->
-
-</div><!-- #index-wrapper -->
+  </div><!-- .row -->
 
 <?php get_footer();
