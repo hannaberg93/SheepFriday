@@ -11,7 +11,8 @@
 require('inc/class.SheepProductFilter.php');
 
 function sheep_enqueue_scripts(){
-     wp_enqueue_script('sheep-product-filter', plugin_dir_url(__FILE__) . 'js/custom-js.js', false, true);
+     wp_enqueue_style('wcms18-oneliners', plugin_dir_url(__FILE__) . 'assets/css/_style.scss');
+     wp_enqueue_script('sheep-product-filter', plugin_dir_url(__FILE__) . 'assets/js/custom-js.js', false, true);
 }
 add_action('wp_enqueue_scripts', 'sheep_enqueue_scripts');
 
