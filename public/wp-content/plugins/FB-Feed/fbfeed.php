@@ -12,13 +12,9 @@
  * Domain Path: /languages
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once "includes/Class-FB_Keys.php";
-require_once "includes/Class-FB_Url_Settup.php";
-require_once "includes/Class-FB_Loop.php";
-require_once "includes/Class-FB_Connect.php";
-require_once "includes/Class-FB_Setting.php";
-include "settings/settings.php";
+ //Load dependencies from class.
+require_once "includes/Class-FB_Dependencies.php";
+FB_Dependencies::load_dependencies();    
 
 function activate_fbfeed() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
