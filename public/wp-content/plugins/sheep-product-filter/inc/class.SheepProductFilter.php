@@ -26,31 +26,83 @@ if (!class_exists('SheepProductFilter')) {
         public function init() {	
             if(is_shop() || is_product_category() || is_tax()) { 
                 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+                
+                $url = $_SERVER['REQUEST_URI'];
+                $tokens = explode('/', $url);
+                $filterType = $tokens[sizeof($tokens)-3];
+                $filterValue = $tokens[sizeof($tokens)-2];;
+                $allowedCategories = [];
+                $allowedBrands = [];
+                
+                if ($tokens[1] === 'product-category') {
+                    $category = get_queried_object();
+                    $data = [];
+
+                    foreach(wc_get_products([ 'category' => [$category->slug]]) as $product){
+                        foreach($product->get_attributes() as $attribute){
+                            if (!(isset($attribute) && $attribute->get_terms())) {
+                                continue;
+                            }
+                            foreach ($attribute->get_terms() as $term){
+                                $data[$term->term_id] = $term->name;
+                            }
+                        }
+                    }
+                    $allowedBrands = $data;
+                } else if ($filterType === 'brand') {
+                    $args = array(
+                        'post_type' => 'product',
+                        'tax_query' => array(
+                        array(
+                            'taxonomy'      => 'pa_brand',
+                            'terms'         => $filterValue,
+                            'field'         => 'slug',
+                            'operator'      => 'IN'
+                            )
+                        )
+                    );
+                    $products = get_posts($args);
+                    foreach($products as $product) {
+                        foreach(get_the_terms( $product->ID, 'product_cat' ) as $category) {
+                            array_push($allowedCategories, $category->name);
+                        }
+                    }
+                }
+                
+                // var_dump($allowedBrands);
+                // die();
 
                 $this->getFormSelect(get_terms([
                     'taxonomy' => 'product_cat',
-                ]), 'category');
+                ]), 'category', $allowedCategories, NULL);
 
 
                 $this->getFormSelect(get_terms([
                     'taxonomy' => 'pa_brand',
-                ]), 'brand');
+                ]), 'brand', NULL, $allowedBrands);
 
                 woocommerce_catalog_ordering();
+
+
             }
         }
 
-        public function getFormSelect($items, $title){
+        public function getFormSelect($items, $title, $allowedCategories, $allowedBrands){
             if(!empty($items)){ ?>
                 <form class="flex-grow-1">
-                    <select class="custom-select filterby" id="selectFilter" onChange="window.location.href=this.value">
-                        <option disabled value="" label="<?php echo 'Filter by ' . $title; ?>"></option>
+                    <select value="" class="custom-select filterby" id="<?php echo $title . 'SelectFilter' ?>" onChange="window.location.href=this.value" name="<?php echo $title . 'SelectFilter' ?>">
+                        <option> <?php echo 'Filter by ' . $title; ?></option>
                         <?php foreach($items as $item){
                             if($item->parent == 0){
-
-                                if($title === 'brand'){ ?>
+                                if($title === 'brand'){
+                                    if (sizeof($allowedBrands) > 0 && !in_array($item->name, $allowedBrands)) {
+                                        continue;
+                                    } ?>
                                     <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html($item->name) . ' (' . $item->count . ')';
-                                }else if($title === 'category'){ ?>
+                                }else if($title === 'category'){ 
+                                    if (sizeof($allowedCategories) > 0 && !in_array($item->name, $allowedCategories)) {
+                                        continue;
+                                    } ?>
                                     <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html($item->name);
                                 }
 
@@ -65,6 +117,7 @@ if (!class_exists('SheepProductFilter')) {
                         }?>
                     </select>
                 </form>
+
             <?php }
         }
     }
