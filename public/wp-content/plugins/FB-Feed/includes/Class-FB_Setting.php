@@ -36,14 +36,14 @@ class FB_Feed_SettingsPage
     public function create_admin_page()
     {
         // Set class property
-        $this->options = get_option( 'token' );
+        $this->options = get_option( 'fb_feed_options' );
         ?>
         <div class="wrap">
             <h1><?php _e("Facebook Feed Settings") ?></h1>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
-                settings_fields( 'my_option_group' );
+                settings_fields( 'fb_feed_group' );
                 do_settings_sections( 'my-setting-admin' );
                 submit_button();
             ?>
@@ -58,8 +58,8 @@ class FB_Feed_SettingsPage
     public function page_init()
     {        
         register_setting(
-            'my_option_group', // Option group
-            'token', // Option name
+            'fb_feed_group', // Option group
+            'fb_feed_options', // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
@@ -108,7 +108,7 @@ class FB_Feed_SettingsPage
      */
     public function print_section_info()
     {
-         _e("Enter your settings below:");
+        _e("Enter your settings below:");
     }
 
     /** 
@@ -117,7 +117,7 @@ class FB_Feed_SettingsPage
     public function accesstoken_callback()
     {
         printf(
-            '<input type="text" id="accesstoken" name="token[accesstoken]" value="%s" />',
+            '<input type="text" id="accesstoken" name="fb_feed_options[accesstoken]" value="%s" />',
             isset( $this->options['accestoken'] ) ? esc_attr( $this->options['accesstoken']) : ''
         );
     }
@@ -125,7 +125,7 @@ class FB_Feed_SettingsPage
     public function url_callback()
     {
         printf(
-            '<input type="text" id="facebook_url" name="token[facebook_url]" value="%s" />',
+            '<input type="text" id="facebook_url" name="fb_feed_options[facebook_url]" value="%s" />',
             isset( $this->options['facebook_url'] ) ? esc_attr( $this->options['facebook_url']) : ''
         );
     }
