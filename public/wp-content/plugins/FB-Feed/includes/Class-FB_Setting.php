@@ -85,6 +85,22 @@ class FB_Feed_SettingsPage
             'my-setting-admin', // Page
             'setting_section_id' // Section           
         );
+
+        add_settings_field(
+            'id', 
+            'ID', 
+            array( $this, 'id_callback' ), 
+            'my-setting-admin', 
+            'setting_section_id'
+        );
+
+        add_settings_field(
+            'secret', 
+            'Secret', 
+            array( $this, 'secret_callback' ), 
+            'my-setting-admin', 
+            'setting_section_id'
+        );
     }
 
     /**
@@ -100,6 +116,12 @@ class FB_Feed_SettingsPage
         if( isset( $input['facebook_url'] ) )
             $new_input['facebook_url'] = sanitize_text_field( $input['facebook_url'] );
         
+        if( isset( $input['id'] ) )
+            $new_input['id'] = sanitize_text_field( $input['id'] );
+        
+        if( isset( $input['secret'] ) )
+            $new_input['secret'] = sanitize_text_field( $input['secret'] );
+
         return $new_input;
     }
 
@@ -127,6 +149,22 @@ class FB_Feed_SettingsPage
         printf(
             '<input type="text" id="facebook_url" name="fb_feed_options[facebook_url]" value="%s" />',
             isset( $this->options['facebook_url'] ) ? esc_attr( $this->options['facebook_url']) : ''
+        );
+    }
+
+    public function id_callback()
+    {
+        printf(
+            '<input type="text" id="id" name="fb_feed_options[id]" value="%s" />',
+            isset( $this->options['id'] ) ? esc_attr( $this->options['id']) : ''
+        );
+    }
+
+    public function secret_callback()
+    {
+        printf(
+            '<input type="text" id="secret" name="fb_feed_options[secret]" value="%s" />',
+            isset( $this->options['secret'] ) ? esc_attr( $this->options['secret']) : ''
         );
     }
 }
