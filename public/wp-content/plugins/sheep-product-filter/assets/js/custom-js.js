@@ -1,27 +1,38 @@
 (function($) {
 
      $(function() {
+
+          if(window.location.href.endsWith("/shop/")){
+               localStorage.removeItem('categorySelectFilter');
+               localStorage.removeItem('brandSelectFilter');
+          }
+
           // Keep selected option when selected/page refresh
-          if (localStorage.getItem('selectFilter')) {
-              $("#selectFilter option").eq(localStorage.getItem('selectFilter')).prop('selected', true);
+          if (localStorage.getItem('categorySelectFilter')) {
+              $("#categorySelectFilter option[value='" + (localStorage.getItem('categorySelectFilter')) + "']").prop('selected', true);
           }
       
-          $("#selectFilter").on('change', function() {
-              localStorage.setItem('selectFilter', $('option:selected', this).index());
+          $("#categorySelectFilter").on('change', function() {
+              localStorage.setItem('categorySelectFilter', $('option:selected', this).val());
           });
+
+          if (localStorage.getItem('brandSelectFilter')) {
+               $("#brandSelectFilter option[value='" + (localStorage.getItem('brandSelectFilter')) + "']").prop('selected', true);
+          }
+       
+          $("#brandSelectFilter").on('change', function() {
+               localStorage.setItem('brandSelectFilter', $('option:selected', this).val());
+          });
+
       });
 
       $(function() {
-          var item = localStorage.getItem('selectFilter');
-
-          if (item) {
-               $("#clearForms").click(function(){
-                    console.log('removing');
-                    localStorage.removeItem(item);
-                    //console.log(localStorage.getItem('selectFilter'));
-                    //localStorage.clear();
-               });
-          }
+          // Clear filtering options
+          $("#clearForms").click(function(){
+               localStorage.removeItem('categorySelectFilter');
+               localStorage.removeItem('brandSelectFilter');
+          });
+          
       });
 
 })(jQuery);
