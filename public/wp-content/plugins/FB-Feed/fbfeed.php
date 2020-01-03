@@ -32,7 +32,7 @@ register_deactivation_hook( __FILE__, 'deactivate_fbfeed' );
 
 
 function sheep_output_FB_feed( $atts ) {
-    $keys = new FB_Keys(FACEBOOK_ID, FACEBOOK_SECRET);
+    $keys = new FB_Keys(FACEBOOK_ID, FACEBOOK_SECRET); //Use the constants gained from the settingspage.
 
     $a = shortcode_atts( array(
     'app_id' => $keys->set_ID(), //Set the ID thru the keys object.
@@ -57,8 +57,6 @@ function sheep_output_FB_feed( $atts ) {
     //Loop over the array
     $loop = new FB_Loop;
     return $loop->loop_over_FB_feed($feed,$array);
-
-    var_dump($array);
 
 }
 add_shortcode( 'sheep_facebookfeed', 'sheep_output_FB_feed' );
