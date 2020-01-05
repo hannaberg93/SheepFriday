@@ -1,7 +1,6 @@
 <?php
 
 if (!class_exists('SheepProductFilter')) {
-
     class SheepProductFilter {
         public function __construct() {	
             add_action('woocommerce_before_shop_loop', [$this, 'startRow'], 0);
@@ -30,7 +29,7 @@ if (!class_exists('SheepProductFilter')) {
                 $url = $_SERVER['REQUEST_URI'];
                 $tokens = explode('/', $url);
                 $filterType = $tokens[sizeof($tokens)-3];
-                $filterValue = $tokens[sizeof($tokens)-2];;
+                $filterValue = $tokens[sizeof($tokens)-2];
                 $allowedCategories = [];
                 $allowedBrands = [];
                 
@@ -69,21 +68,15 @@ if (!class_exists('SheepProductFilter')) {
                     }
                 }
                 
-                // var_dump($allowedBrands);
-                // die();
-
                 $this->getFormSelect(get_terms([
                     'taxonomy' => 'product_cat',
                 ]), 'category', $allowedCategories, NULL);
-
 
                 $this->getFormSelect(get_terms([
                     'taxonomy' => 'pa_brand',
                 ]), 'brand', NULL, $allowedBrands);
 
                 woocommerce_catalog_ordering();
-
-
             }
         }
 
@@ -91,7 +84,8 @@ if (!class_exists('SheepProductFilter')) {
             if(!empty($items)){ ?>
                 <form class="flex-grow-1">
                     <select value="" class="custom-select filterby" id="<?php echo $title . 'SelectFilter' ?>" onChange="window.location.href=this.value" name="<?php echo $title . 'SelectFilter' ?>">
-                        <option> <?php echo 'Filter by ' . $title; ?></option>
+                        <option id="<?php echo $title; ?>DefaultFilterOption" value=""> <?php echo 'Filter by ' . $title; ?></option>
+
                         <?php foreach($items as $item){
                             if($item->parent == 0){
                                 if($title === 'brand'){
@@ -107,7 +101,10 @@ if (!class_exists('SheepProductFilter')) {
                                 }
 
                                 foreach($items as $subitem){
-                                    if($subitem->parent == $item->term_id){ ?>
+                                    if($subitem->parent == $item->term_id){ 
+                                        if (sizeof($allowedCategories) > 0 && !in_array($subitem->name, $allowedCategories)) {
+                                            continue;
+                                        } ?>
                                         <option value="<?php echo get_term_link($subitem->term_id); ?>"> - <?php echo esc_html($subitem->name) . ' (' . $subitem->count . ')'; ?></option>
                                     <?php }
                                 } ?>

@@ -10,6 +10,7 @@
           // Keep selected option when selected/page refresh
           if (localStorage.getItem('categorySelectFilter')) {
               $("#categorySelectFilter option[value='" + (localStorage.getItem('categorySelectFilter')) + "']").prop('selected', true);
+              $('#categoryDefaultFilterOption').attr('disabled', 'disabled');
           }
       
           $("#categorySelectFilter").on('change', function() {
@@ -18,6 +19,7 @@
 
           if (localStorage.getItem('brandSelectFilter')) {
                $("#brandSelectFilter option[value='" + (localStorage.getItem('brandSelectFilter')) + "']").prop('selected', true);
+               $('#brandDefaultFilterOption').attr('disabled', 'disabled');
           }
        
           $("#brandSelectFilter").on('change', function() {
@@ -27,12 +29,10 @@
       });
 
       $(function() {
-          // Clear filtering options
           $("#clearForms").click(function(){
                localStorage.removeItem('categorySelectFilter');
                localStorage.removeItem('brandSelectFilter');
           });
-          
       });
 
 })(jQuery);
