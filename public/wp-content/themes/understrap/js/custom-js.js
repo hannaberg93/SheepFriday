@@ -5,4 +5,8 @@ jQuery(document).ready(function($){
 		e.stopPropagation();
 		e.preventDefault();
 	});
+
+	$('button[name="update_cart"]').click(function(){
+		//location.reload();
+	});
 });

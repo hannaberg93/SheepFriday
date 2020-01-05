@@ -80,28 +80,28 @@ function change_existing_currency_symbol( $currency_symbol, $currency ) {
 /**
  * Shipping by Weight
  */
-  
-add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shipping', 9999, 2 );
-    
-function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
-     
-     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
-       
-         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
-       
-     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
-       
-         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
-       
-     } else {
-       
-         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:12'] );
-       
-     } 
 
-    
+add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shipping', 9999, 2 );
+
+function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
+
+     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
+
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
+
+     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
+
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
+
+     } else {
+
+         if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:12'] );
+
+     }
+
+
      return $rates;
-    
+
 }
 
 /**
@@ -130,8 +130,8 @@ function display_weight_data( $cart_item_data, $cart_item ) {
             'name' => __( 'Weight', 'understrap' ),
             'value' =>  $cart_item['data']->get_weight()  . ' ' . get_option('woocommerce_weight_unit')
         );
-    } 
-    
+    }
+
     return $cart_item_data;
 }
 
@@ -139,7 +139,7 @@ function display_weight_data( $cart_item_data, $cart_item ) {
 
 add_filter( 'woocommerce_loop_add_to_cart_link', 'quantity_inputs', 10, 2 );
   function quantity_inputs( $html, $product ) {
-    foreach ( WC()->cart->get_cart() as $cart_item ) { 
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
       $qty = '';
       if($cart_item['product_id'] == $product->get_id() ){
         if (isset($cart_item['quantity'])) {

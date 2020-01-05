@@ -1,25 +1,25 @@
 #sidebar-menu {
   width: 100%;
   height: 100%;
-  background-color: #e9b872;
+  background-color: #f8f9fa;
 }
 
 .product-menu-category {
-  background-color: #e9b872;
+  background-color: #f8f9fa;
   &:hover {
-    background-color: #f0c993;
+    background-color: #f8f9fa;
   }
 }
 
 .product-menu-sub-category {
-  background-color: #facb88;
+  background-color: #f8f9fa;
 }
 
 .sub-cat-title {
   color: black;
   text-decoration: none;
     &:hover {
-      color: #b33101;
+      color: #53f;
       text-decoration: none;
     }
   }
