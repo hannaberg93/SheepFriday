@@ -105,6 +105,22 @@ function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
 }
 
 /**
+ * Hide shipping rates when free shipping is available.
+ */
+function hide_shipping_when_free_is_available( $rates ) {
+  $free = array();
+  foreach ( $rates as $rate_id => $rate ) {
+    if ( 'free_shipping' === $rate->method_id ) {
+      $free[ $rate_id ] = $rate;
+      break;
+    }
+  }
+  return ! empty( $free ) ? $free : $rates;
+}
+add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 100 );
+
+
+/**
  * Show product weight on archive pages
  */
 add_action( 'woocommerce_after_shop_loop_item', 'sheep_show_weights', 9 );
