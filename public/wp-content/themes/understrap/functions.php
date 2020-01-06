@@ -139,8 +139,9 @@ function display_weight_data( $cart_item_data, $cart_item ) {
 
 add_filter( 'woocommerce_loop_add_to_cart_link', 'quantity_inputs', 10, 2 );
   function quantity_inputs( $html, $product ) {
+    $qty = '';
+    
     foreach ( WC()->cart->get_cart() as $cart_item ) {
-      $qty = '';
       if($cart_item['product_id'] == $product->get_id() ){
         if (isset($cart_item['quantity'])) {
           $qty =  $cart_item['quantity'];
