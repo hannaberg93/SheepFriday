@@ -85,11 +85,11 @@ add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shippin
 
 function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
 
-     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
+     if ( WC()->cart->get_cart_contents_weight() < 9 ) {
 
          if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
 
-     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
+     } elseif ( WC()->cart->get_cart_contents_weight() < 20 ) {
 
          if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
 
