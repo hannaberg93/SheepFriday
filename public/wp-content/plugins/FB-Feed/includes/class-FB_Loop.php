@@ -47,7 +47,8 @@ class FB_Loop{
 
                 //if only one image
                 elseif(isset($item['attachments']) && !isset($item['attachments'][0]['subattachments'])){
-                    $content .= '<div class="col-12 col-md-3"><img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-75 mx-auto" alt="Postpics"></div></div>';
+                    $content .= '<div class="col-12 col-md-3"><img src="' . $item['attachments'][0]['media']['image']['src'] . '"class="img-responsive mt-4 mb-4 w-75 mx-auto" alt="Postpics"></div>
+                    <div class="col-12"><p class="font-italic">' . date('Y jS  F h:i', strtotime($item['created_time']['date'])) . '</p></div></div>';
                 }
             }
         }
