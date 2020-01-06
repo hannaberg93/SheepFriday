@@ -41,7 +41,7 @@ get_header( 'shop' ); ?>
         <h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
       <?php endif; ?>
 
-      <h2 class="mt-5 mb-5">Specials & Offers</h2>
+      <h2 class="mt-5 mb-5"><?php __('Specials & Offers', 'understrap') ?></h2>
       <?php get_template_part( 'global-templates/special-hero' ); ?>
 
       <?php
