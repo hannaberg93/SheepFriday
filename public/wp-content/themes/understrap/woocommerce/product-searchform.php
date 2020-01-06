@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<form class="form-inline" role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 
-		<label class="sr-only" for="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
+		<label class="sr-only" for="woocommerce-product-search-field-1"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
 
-		<input class="form-control" type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
+		<input class="form-control" type="search" id="woocommerce-product-search-field-1" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
 		<input type="hidden" name="post_type" value="product" />
 
 		<span class="input-group-append">
@@ -42,9 +42,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<form class="input-group md-form form-sm form-2 pl-0" role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 
-			<label class="sr-only" for="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
+			<label class="sr-only" for="woocommerce-product-search-field-2"><?php esc_html_e( 'Search for:', 'understrap' ); ?></label>
 
-			<input class="form-control my-0 py-1" type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
+			<input class="form-control my-0 py-1" type="search" id="woocommerce-product-search-field-2" class="search-field field form-control" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'understrap' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
 			<input type="hidden" name="post_type" value="product" />
 
 			<button class="submit btn p-0" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'understrap' ); ?>">

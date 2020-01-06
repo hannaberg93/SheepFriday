@@ -43,7 +43,7 @@
 					<div class="col item social">
 					<hr>
 					<h2>Get our latest news</h2>
-					<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="https://www.facebook.com/sheepfriday/"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a>
 					</div>
                 </div>
                 <p class="copyright">Sheep Friday © 2020</p>
