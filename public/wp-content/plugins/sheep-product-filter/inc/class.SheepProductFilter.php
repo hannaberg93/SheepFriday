@@ -24,6 +24,10 @@ if (!class_exists('SheepProductFilter')) {
 
         public function init() {	
             if(is_shop() || is_product_category() || is_tax()) { 
+                // Dont display filtering options if front page
+                if(is_front_page() || is_home()){
+                    return;
+                }
                 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
                 
                 $url = $_SERVER['REQUEST_URI'];
