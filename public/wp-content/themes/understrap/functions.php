@@ -85,11 +85,11 @@ add_filter( 'woocommerce_package_rates', 'sheepfriday_woocommerce_weight_shippin
 
 function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
 
-     if ( WC()->cart->get_cart_contents_weight() < 1 ) {
+     if ( WC()->cart->get_cart_contents_weight() < 9 ) {
 
          if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:12'], $rates['flat_rate:13'] );
 
-     } elseif ( WC()->cart->get_cart_contents_weight() < 5 ) {
+     } elseif ( WC()->cart->get_cart_contents_weight() < 20 ) {
 
          if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'], $rates['flat_rate:13'] );
 
@@ -103,6 +103,22 @@ function sheepfriday_woocommerce_weight_shipping( $rates, $package ) {
      return $rates;
 
 }
+
+/**
+ * Hide shipping rates when free shipping is available.
+ */
+function hide_shipping_when_free_is_available( $rates ) {
+  $free = array();
+  foreach ( $rates as $rate_id => $rate ) {
+    if ( 'free_shipping' === $rate->method_id ) {
+      $free[ $rate_id ] = $rate;
+      break;
+    }
+  }
+  return ! empty( $free ) ? $free : $rates;
+}
+add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 100 );
+
 
 /**
  * Show product weight on archive pages
@@ -139,8 +155,9 @@ function display_weight_data( $cart_item_data, $cart_item ) {
 
 add_filter( 'woocommerce_loop_add_to_cart_link', 'quantity_inputs', 10, 2 );
   function quantity_inputs( $html, $product ) {
+    $qty = '';
+    
     foreach ( WC()->cart->get_cart() as $cart_item ) {
-      $qty = '';
       if($cart_item['product_id'] == $product->get_id() ){
         if (isset($cart_item['quantity'])) {
           $qty =  $cart_item['quantity'];

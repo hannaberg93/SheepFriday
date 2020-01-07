@@ -4,7 +4,7 @@ class FB_url_settup{
     protected $feedLimit;
     protected $fields;
     protected $subFields;
-    protected $url = "/sheepfriday/?fields="; // ugly hardcode, fix if time allows.
+    protected $url = "/" . FACEBOOK_URL . "/?fields=";
 
     public function __construct($feedLimit, $fields, $subFields){
         $this->feedLimit = $feedLimit;
@@ -41,7 +41,7 @@ class FB_url_settup{
             $this->url .= "}";
         }
         else{
-            $this->url .= "feed.limit('. $feedLimit .'){message}";
+            $this->url .= "feed.limit(". $feedLimit ."){message}";
         }
         return $this->url . ",picture,name"; // needed for getting the name and "profile picture" of facebook page (could possibly be improved if time allows)
     }

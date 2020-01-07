@@ -12,21 +12,32 @@
  * Domain Path: /languages
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once "includes/Class-FB_Keys.php";
-require_once "includes/Class-FB_Url_Settup.php";
-require_once "includes/Class-FB_Loop.php";
-require_once "includes/Class-FB_Connect.php";
-include "settings/settings.php";
+ //Load dependencies from class.
+require_once "includes/Class-FB_Dependencies.php";
+FB_Dependencies::load_dependencies();    
+
+function activate_fbfeed() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
+	FB_Activate::activate();
+}
+
+function deactivate_fbfeed() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Deactivator.php';
+	FB_Deactivate::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_fbfeed' );
+register_deactivation_hook( __FILE__, 'deactivate_fbfeed' );
+
+
 
 function sheep_output_FB_feed( $atts ) {
-    $keys = new FB_Keys(APP_ID, APP_SECRET);
+    $keys = new FB_Keys(FACEBOOK_ID, FACEBOOK_SECRET); //Use the constants gained from the settingspage.
 
     $a = shortcode_atts( array(
     'app_id' => $keys->set_ID(), //Set the ID thru the keys object.
     'app_secret' => $keys->set_Secret(), //Set the secret thru the keys object.
-    'access_token' => false, //Use false as default, force user to put access token as argument.
-    'feed_limit' => 2
+    'feed_limit' => false
     ), $atts );
 
     //Set object with values needed.
@@ -37,7 +48,7 @@ function sheep_output_FB_feed( $atts ) {
 
     //Create a new connection
     $connection = new FB_Connect;
-    $connection->connect($a['app_id'],$a['app_secret'],$endpoint,$a['access_token']);
+    $connection->connect($a['app_id'],$a['app_secret'],$endpoint,ACCESSTOKEN);
 
     //Convert he JSON to PHP array
     $array = json_decode($connection->get_graphNode(),true);
@@ -46,5 +57,6 @@ function sheep_output_FB_feed( $atts ) {
     //Loop over the array
     $loop = new FB_Loop;
     return $loop->loop_over_FB_feed($feed,$array);
+
 }
-add_shortcode( 'facebookfeed', 'sheep_output_FB_feed' );
+add_shortcode( 'sheep_facebookfeed', 'sheep_output_FB_feed' );

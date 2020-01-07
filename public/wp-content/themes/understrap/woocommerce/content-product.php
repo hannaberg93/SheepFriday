@@ -23,17 +23,6 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
-
-$product_id = $product->get_id();
-
-$qty = 0;
-
-foreach ( WC()->cart->get_cart() as $cart_item ) { 
-  if($cart_item['product_id'] == $product_id ){
-    $qty =  $cart_item['quantity'];
-    break;
-  }
-}
 ?>
 
 <li <?php wc_product_class( '', $product ); ?>>

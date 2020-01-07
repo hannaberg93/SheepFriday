@@ -88,7 +88,7 @@ if (!class_exists('SheepProductFilter')) {
             if(!empty($items)){ ?>
                 <form class="flex-grow-1">
                     <select value="" class="custom-select filterby" id="<?php echo $title . 'SelectFilter' ?>" onChange="window.location.href=this.value" name="<?php echo $title . 'SelectFilter' ?>">
-                        <option id="<?php echo $title; ?>DefaultFilterOption" value=""> <?php echo 'Filter by ' . $title; ?></option>
+                        <option id="<?php echo $title; ?>DefaultFilterOption" value=""> <?php _e('Filter by ', 'understrap') . _e($title, 'understrap'); ?></option>
 
                         <?php foreach($items as $item){
                             if($item->parent == 0){
@@ -96,12 +96,12 @@ if (!class_exists('SheepProductFilter')) {
                                     if (sizeof($allowedBrands) > 0 && !in_array($item->name, $allowedBrands)) {
                                         continue;
                                     } ?>
-                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html($item->name) . ' (' . $item->count . ')';
+                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php esc_html_e($item->name, 'understrap'); echo ' (' . $item->count . ')';
                                 }else if($title === 'category'){ 
                                     if (sizeof($allowedCategories) > 0 && !in_array($item->name, $allowedCategories)) {
                                         continue;
                                     } ?>
-                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html($item->name);
+                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php esc_html_e($item->name, 'understrap');
                                 }
 
                                 foreach($items as $subitem){
@@ -109,7 +109,7 @@ if (!class_exists('SheepProductFilter')) {
                                         if (sizeof($allowedCategories) > 0 && !in_array($subitem->name, $allowedCategories)) {
                                             continue;
                                         } ?>
-                                        <option value="<?php echo get_term_link($subitem->term_id); ?>"> - <?php echo esc_html($subitem->name) . ' (' . $subitem->count . ')'; ?></option>
+                                        <option value="<?php echo get_term_link($subitem->term_id); ?>"> - <?php esc_html_e($subitem->name, 'understrap'); echo ' (' . $subitem->count . ')'; ?></option>
                                     <?php }
                                 } ?>
 

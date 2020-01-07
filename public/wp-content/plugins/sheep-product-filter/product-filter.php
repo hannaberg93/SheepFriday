@@ -6,6 +6,8 @@
  * Version: 1.0
  * Author: Hanna Berg
  * Author URI: -
+ * Text Domain: understrap
+ * Domain Path: /languages
  */
 
 require('inc/class.SheepProductFilter.php');
