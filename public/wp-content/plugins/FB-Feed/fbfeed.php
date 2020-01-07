@@ -13,16 +13,16 @@
  */
 
  //Load dependencies from class.
-require_once "includes/Class-FB_Dependencies.php";
+require_once "includes/class-FB_Dependencies.php";
 FB_Dependencies::load_dependencies();    
 
 function activate_fbfeed() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-FB_Activator.php';
 	FB_Activate::activate();
 }
 
 function deactivate_fbfeed() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-FB_Deactivator.php';
 	FB_Deactivate::deactivate();
 }
 

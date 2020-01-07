@@ -1,9 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once "Class-FB_Keys.php";
-require_once "Class-FB_Url_Settup.php";
+require_once "class-FB_Keys.php";
+require_once "class-FB_Url_Settup.php";
 
 class FB_Loop{
+    protected $content;
 
     function loop_over_FB_feed($feed,$array){
         foreach ($feed as $item) {
