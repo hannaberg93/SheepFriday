@@ -2,22 +2,16 @@
 //define("APP_ID", "2221274434844713");
 //define("APP_SECRET", "48403dbaeba50a4d7f926016e957610f");
 
-//get the token from the settingspage.
-$token = get_option('fb_feed_options');
+$options = get_option('fb_feed_options');
+
 //Use the token as a constant.
-define("ACCESSTOKEN", $token['accesstoken']);
+define("ACCESSTOKEN", $options['accesstoken']);
 
-//get the url startpoint from the settingspage.
-$url = get_option('fb_feed_options');
 //Use the url startpoint as a constant
-define("FACEBOOK_URL", $url['facebook_url']);
+define("FACEBOOK_URL", $options['facebook_url']);
 
-//get the url startpoint from the settingspage.
-$id = get_option('fb_feed_options');
-//Use the url startpoint as a constant
-define("FACEBOOK_ID", $id['id']);
+//Use the id as a constant
+define("FACEBOOK_ID", $options['id']);
 
-//get the url startpoint from the settingspage.
-$secret = get_option('fb_feed_options');
-//Use the url startpoint as a constant
-define("FACEBOOK_SECRET", $secret['secret']);
+//Use the secret as a constant
+define("FACEBOOK_SECRET", $options['secret']);
