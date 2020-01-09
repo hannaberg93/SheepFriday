@@ -1,21 +1,29 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once "Class-FB_Keys.php";
-require_once "Class-FB_Url_Settup.php";
 
 class FB_Loop{
+    protected $content;
 
     function loop_over_FB_feed($feed,$array){
+        
+        //used to check if it's the first iteration
+        $counter = 0;
+        
         foreach ($feed as $item) {
 
+            if ($counter == 0){
+                //if it's the first iteration don't append content, instead start the content with an empty string
+                $content = "";
+                $counter++;
+            }
+
            //if no attachments are set render out only the message
-           if (isset($item["message"]) && !isset($item['attachments'])) {
+            if (isset($item["message"]) && !isset($item['attachments'])) {
             $content .='<div class="card p-2 mt-2 shadow bg-white rounded">
                             <div class="d-inline">
                                 <img src="'. $array['picture']['url'] .'"><h2 class="d-inline ml-2">'.$array['name'].'</h2><hr>
                             </div>
                             <div>
-                                <p>' . $item["message"] . '</p>
+                                <p>' . __($item["message"]) . '</p>
                                 <p class="font-italic">' . date('Y jS  F h:i', strtotime($item['created_time']['date'])) . '</p>
                             </div>
                         </div>';
@@ -29,7 +37,7 @@ class FB_Loop{
                                     <img src="'. $array['picture']['url'] .'"><h2 class="d-inline-flex ml-2">'.$array['name'].'</h2><hr>
                                 </div>
                             <div>
-                                <p>' . $item["message"] . '</p>
+                                <p>' . __($item["message"]) . '</p>
                             </div>';
 
                 //Check for several images

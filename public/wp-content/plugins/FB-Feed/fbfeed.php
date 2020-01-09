@@ -8,27 +8,37 @@
  * Author URI:  https://pluginseverywhere.noooo
  * License:     WTFPL
  * License URI: http://www.wtfpl.net/
- * Text Domain: Fab Plugin
- * Domain Path: /languages
+ * Text Domain: fb-feed
+ * Domain Path: /languages/
  */
 
  //Load dependencies from class.
-require_once "includes/Class-FB_Dependencies.php";
-FB_Dependencies::load_dependencies();    
+require_once "includes/class-FB_Dependencies.php";
+FB_Dependencies::load_dependencies();
+
+function my_plugin_init() {
+    load_plugin_textdomain( 'fb-feed', false, 'fb-feed/languages' );
+  }
+  add_action('init', 'my_plugin_init');
+//load_plugin_textdomain( 'fb-feed', false, dirname( plugin_basename( __FILE__ ) ) );
+// function load_fb_textdomain() {
+//     load_plugin_textdomain( 'fb-feed', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+//   }
+  
+//   add_action( 'plugins_loaded', 'load_fb_textdomain' );
 
 function activate_fbfeed() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-FB_Activator.php';
 	FB_Activate::activate();
 }
 
 function deactivate_fbfeed() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/Class-FB_Deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-FB_Deactivator.php';
 	FB_Deactivate::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_fbfeed' );
 register_deactivation_hook( __FILE__, 'deactivate_fbfeed' );
-
 
 
 function sheep_output_FB_feed( $atts ) {

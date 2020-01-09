@@ -23,7 +23,7 @@ class FB_Feed_SettingsPage
         // This page will be under "Settings"
         add_options_page(
             'Settings Admin', 
-            'Facebook Feed Settings', 
+            __('Facebook Feed Settings', 'fb-feed'), 
             'manage_options', 
             'my-setting-admin', 
             array( $this, 'create_admin_page' )
@@ -39,7 +39,7 @@ class FB_Feed_SettingsPage
         $this->options = get_option( 'fb_feed_options' );
         ?>
         <div class="wrap">
-            <h1><?php _e("Facebook Feed Settings") ?></h1>
+            <h1><?php _e('Facebook Feed Settings', 'fb-feed') ?></h1>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
@@ -65,7 +65,7 @@ class FB_Feed_SettingsPage
 
         add_settings_section(
             'setting_section_id', // ID
-            'Facebook Feed Settings', // Title
+            __('Facebook Feed Settings', 'fb-feed'), // Title
             array( $this, 'print_section_info' ), // Callback
             'my-setting-admin' // Page
         );  
@@ -130,7 +130,7 @@ class FB_Feed_SettingsPage
      */
     public function print_section_info()
     {
-        _e("Enter your settings below:");
+        _e("Enter your settings below:","fb-feed");
     }
 
     /** 
