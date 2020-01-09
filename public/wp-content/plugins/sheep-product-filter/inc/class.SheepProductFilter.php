@@ -14,35 +14,50 @@ if (!class_exists('SheepProductFilter')) {
                 <div class="custom-order col-12 d-flex align-items-center">';
         }
 
-        public function endRow() {
+        public function endRow() {         
             echo 
                 '
-                    <a href="' . get_permalink(woocommerce_get_page_id('shop')) . '" class="btn btn-primary ml-2" id="clearForms">Clear</a>
+                    <a href="' . get_site_url() . '/shop' . '" class="btn btn-primary ml-2" id="clearForms">Clear</a>
                 </div>
             </div>';
         }
 
         public function init() {	
-            if(is_shop() || is_product_category() || is_tax()) { 
-                // Dont display filtering options if front page
-                if(is_front_page() || is_home()){
-                    return;
-                }
+            if(is_shop() || is_product_category() || is_tax() || is_front_page()) { 
                 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-                
+
                 $url = $_SERVER['REQUEST_URI'];
-                $tokens = explode('/', $url);
-                $filterType = $tokens[sizeof($tokens)-3];
-                $filterValue = $tokens[sizeof($tokens)-2];
+                $urlParts = explode('/', $url);
+
+                if($urlParts[1] === 'sv'){
+                    $urlModifier = 1;
+                }else{
+                    $urlModifier = 0;
+                }
+                
+                if ((sizeof($urlParts) > 2)) {
+                    $filterType = $urlParts[sizeof($urlParts)-3];
+                    $filterValue = $urlParts[sizeof($urlParts)-2];
+                } else {
+                    $filterType = '';
+                    $filterValue = '';
+                }
+
                 $allowedCategories = [];
                 $allowedBrands = [];
-                
-                if ($tokens[1] === 'product-category') {
+
+                if ($urlParts[1 + $urlModifier] === 'product-category') {
                     $category = get_queried_object();
                     $data = [];
+                    $categoryName = $category->slug;
 
-                    foreach(wc_get_products([ 'category' => [$category->slug]]) as $product){
+                    if(substr($categoryName, strlen($categoryName) -3) == '-sv'){
+                        $categoryName = substr($categoryName, 0, strlen($categoryName) -3);
+                    }
+
+                    foreach(wc_get_products([ 'category' => [$categoryName]]) as $product){
                         foreach($product->get_attributes() as $attribute){
+
                             if (!(isset($attribute) && $attribute->get_terms())) {
                                 continue;
                             }
@@ -53,17 +68,14 @@ if (!class_exists('SheepProductFilter')) {
                     }
                     $allowedBrands = $data;
                 } else if ($filterType === 'brand') {
-                    $args = array(
+                    $args = [
                         'post_type' => 'product',
-                        'tax_query' => array(
-                        array(
+                        'tax_query' => [[
                             'taxonomy'      => 'pa_brand',
                             'terms'         => $filterValue,
                             'field'         => 'slug',
-                            'operator'      => 'IN'
-                            )
-                        )
-                    );
+                        ]]
+                    ];
                     $products = get_posts($args);
                     foreach($products as $product) {
                         foreach(get_the_terms( $product->ID, 'product_cat' ) as $category) {
@@ -88,7 +100,7 @@ if (!class_exists('SheepProductFilter')) {
             if(!empty($items)){ ?>
                 <form class="flex-grow-1">
                     <select value="" class="custom-select filterby" id="<?php echo $title . 'SelectFilter' ?>" onChange="window.location.href=this.value" name="<?php echo $title . 'SelectFilter' ?>">
-                        <option id="<?php echo $title; ?>DefaultFilterOption" value=""> <?php _e('Filter by ', 'understrap') . _e($title, 'understrap'); ?></option>
+                        <option id="<?php echo $title; ?>DefaultFilterOption" value=""> <?php _e('Filter by ', 'sheep-product-filter') . _e($title, 'sheep-product-filter'); ?></option>
 
                         <?php foreach($items as $item){
                             if($item->parent == 0){
@@ -96,12 +108,12 @@ if (!class_exists('SheepProductFilter')) {
                                     if (sizeof($allowedBrands) > 0 && !in_array($item->name, $allowedBrands)) {
                                         continue;
                                     } ?>
-                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php esc_html_e($item->name, 'understrap'); echo ' (' . $item->count . ')';
+                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html_e($item->name, 'sheep-product-filter'); echo ' (' . $item->count . ')';
                                 }else if($title === 'category'){ 
                                     if (sizeof($allowedCategories) > 0 && !in_array($item->name, $allowedCategories)) {
                                         continue;
                                     } ?>
-                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php esc_html_e($item->name, 'understrap');
+                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php esc_html_e($item->name, 'sheep-product-filter');
                                 }
 
                                 foreach($items as $subitem){
@@ -109,7 +121,7 @@ if (!class_exists('SheepProductFilter')) {
                                         if (sizeof($allowedCategories) > 0 && !in_array($subitem->name, $allowedCategories)) {
                                             continue;
                                         } ?>
-                                        <option value="<?php echo get_term_link($subitem->term_id); ?>"> - <?php esc_html_e($subitem->name, 'understrap'); echo ' (' . $subitem->count . ')'; ?></option>
+                                        <option value="<?php echo get_term_link($subitem->term_id); ?>"> - <?php esc_html_e($subitem->name, 'sheep-product-filter'); echo ' (' . $subitem->count . ')'; ?></option>
                                     <?php }
                                 } ?>
 

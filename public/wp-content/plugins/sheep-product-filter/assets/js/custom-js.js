@@ -1,10 +1,14 @@
 (function($) {
 
      $(function() {
-
-          if(window.location.href.endsWith("/shop/")){
+          if(window.location.href.endsWith("/shop/") || (window.location.protocol + '//' +  window.location.hostname + '/') === window.location.href || (window.location.protocol + '//' +  window.location.hostname + '/sv/') === window.location.href){
                localStorage.removeItem('categorySelectFilter');
                localStorage.removeItem('brandSelectFilter');
+          }
+
+          // Remember the product category
+          if (location.pathname.includes('/product-category/')) {
+               localStorage.setItem('categorySelectFilter', location.href);
           }
 
           // Keep selected option when selected/page refresh
@@ -12,20 +16,16 @@
               $("#categorySelectFilter option[value='" + (localStorage.getItem('categorySelectFilter')) + "']").prop('selected', true);
               $('#categoryDefaultFilterOption').attr('disabled', 'disabled');
           }
-      
-          $("#categorySelectFilter").on('change', function() {
-              localStorage.setItem('categorySelectFilter', $('option:selected', this).val());
-          });
 
+          // Remember the brand
+          if (location.pathname.includes('/brand/')) {
+               localStorage.setItem('brandSelectFilter', location.href);
+          }
+          
           if (localStorage.getItem('brandSelectFilter')) {
                $("#brandSelectFilter option[value='" + (localStorage.getItem('brandSelectFilter')) + "']").prop('selected', true);
                $('#brandDefaultFilterOption').attr('disabled', 'disabled');
           }
-       
-          $("#brandSelectFilter").on('change', function() {
-               localStorage.setItem('brandSelectFilter', $('option:selected', this).val());
-          });
-
       });
 
       $(function() {
