@@ -26,11 +26,16 @@
                $("#brandSelectFilter option[value='" + (localStorage.getItem('brandSelectFilter')) + "']").prop('selected', true);
                $('#brandDefaultFilterOption').attr('disabled', 'disabled');
 
+               // get selected category from localstorage
                var categorySelectFilter = localStorage.getItem('categorySelectFilter');
+
                // @ts-ignore
                if (typeof categoryBrandInfo === 'object' && categorySelectFilter) {
                     // @ts-ignore
+                    // get brands associated with selected category 
                     var allowedBrands = categoryBrandInfo[categorySelectFilter];
+
+                    // remove all brands not associated with selected category from option list
                     $('#brandSelectFilter').children().each(function () {
                          if (!allowedBrands.includes(this.value)) {
                               $(this).remove();

@@ -52,6 +52,7 @@ if (!class_exists('SheepProductFilter')) {
                 $categoryBrandInfo = [];
 
                 if ($urlParts[1 + $urlModifier] === 'product-category') {
+
                     // get current category
                     $category = get_queried_object();
                     $categoryName = $category->slug;
@@ -74,15 +75,16 @@ if (!class_exists('SheepProductFilter')) {
                         ]]
                     ];
                     
+                    // get products in selected brand
                     $products = get_posts($args);
                     
-                    // get brands
+                    // get categories of the products
                     foreach($products as $product) {
                         foreach(get_the_terms( $product->ID, 'product_cat' ) as $category) {
                             array_push($allowedCategories, $category->name);
                             $categoryTerm = get_term_link($category->term_id);
 
-                            // get brands from products in selected category
+                            // get all other brands from products in each category for use in javascript filtering
                             foreach($this->getBrandsInCategory($category->name) as $id) {
                                 if (!isset($categoryBrandInfo[$categoryTerm])) {
                                     $categoryBrandInfo[$categoryTerm] = [];
@@ -118,11 +120,12 @@ if (!class_exists('SheepProductFilter')) {
         public function getBrandsInCategory($categoryName) {
             $data = [];
             foreach(wc_get_products([ 'category' => [$categoryName]]) as $product){
-                // get attribute from products in category
+                // get attribute from products in category (pa_brand)
                 foreach($product->get_attributes() as $attribute){
                     if (!(isset($attribute) && $attribute->get_terms())) {
                         continue;
                     }
+
                     // get brand names
                     foreach ($attribute->get_terms() as $term){
                         $data[$term->term_id] = $term->name;
