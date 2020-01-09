@@ -14,7 +14,7 @@ if (!class_exists('SheepProductFilter')) {
                 <div class="custom-order col-12 d-flex align-items-center">';
         }
 
-        public function endRow() {
+        public function endRow() {         
             echo 
                 '
                     <a href="' . get_site_url() . '/shop' . '" class="btn btn-primary ml-2" id="clearForms">Clear</a>
@@ -144,7 +144,7 @@ if (!class_exists('SheepProductFilter')) {
                                     if (sizeof($allowedBrands) > 0 && !in_array($item->name, $allowedBrands)) {
                                         continue;
                                     } ?>
-                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html(__($item->name, 'sheep-product-filter')); echo ' (' . $item->count . ')';
+                                    <option value="<?php echo get_term_link($item->term_id); ?>"><?php echo esc_html_e($item->name, 'sheep-product-filter'); echo ' (' . $item->count . ')';
                                 }else if($title === 'category'){ 
                                     if (sizeof($allowedCategories) > 0 && !in_array($item->name, $allowedCategories)) {
                                         continue;
